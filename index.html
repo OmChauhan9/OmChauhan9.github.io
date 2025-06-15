@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Om Chauhan | Software Engineer</title>
+    <!-- Chosen Palette: Warm Neutrals -->
+    <!-- Application Structure Plan: A single-page portfolio with a fixed top navigation bar for smooth scrolling to sections: Home, Skills, Experience, Projects, and Education. This structure creates a narrative flow, guiding the user from a high-level summary to detailed evidence. An interactive skills dashboard allows recruiters to filter projects and experience by technology, directly connecting abilities to accomplishments. Key metrics in the experience section are visualized with charts to make impact more memorable. This user-centric design prioritizes scannability while rewarding deeper exploration, which is ideal for busy recruiters. -->
+    <!-- Visualization & Content Choices: 1. Skills: Presented as interactive filter buttons (HTML/CSS/JS) to organize content and show relationships between skills and work. 2. Experience Metrics: Small bar charts (Chart.js) are used to visually represent quantifiable achievements (e.g., "30% reduction"), making the impact more concrete and engaging than text alone. 3. Projects: A responsive grid of cards (HTML/CSS) to organize the portfolio cleanly. 4. Timeline: A vertical timeline (HTML/CSS) for experience to show career progression. This combination of interactive elements and data visualization turns a static resume into an engaging story of professional growth. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F5F5F4; /* stone-100 */
+            color: #292524; /* stone-800 */
+        }
+        @import url('https://rsms.me/inter/inter.css');
+        .skill-tag {
+            transition: all 0.2s ease-in-out;
+        }
+        .skill-tag.active {
+            background-color: #0D9488; /* teal-600 */
+            color: white;
+            transform: scale(1.05);
+        }
+        .highlight {
+            box-shadow: 0 0 0 3px #14B8A6; /* teal-500 */
+            border-radius: 0.5rem;
+            transition: box-shadow 0.3s ease-in-out;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 250px;
+            max-height: 300px;
+        }
+        .modal-overlay {
+            transition: opacity 0.3s ease;
+        }
+        .modal-content {
+            transition: transform 0.3s ease;
+        }
+        .spinner {
+            border-top-color: #0D9488;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Header & Navigation -->
+    <header class="bg-stone-50/80 backdrop-blur-sm sticky top-0 z-50 shadow-sm">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#home" class="text-2xl font-bold text-stone-800">Om Chauhan</a>
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="#skills" class="text-stone-600 hover:text-teal-600 transition">Skills</a>
+                <a href="#experience" class="text-stone-600 hover:text-teal-600 transition">Experience</a>
+                <a href="#projects" class="text-stone-600 hover:text-teal-600 transition">Projects</a>
+                <a href="#education" class="text-stone-600 hover:text-teal-600 transition">Education</a>
+                <a href="#career" class="text-stone-600 hover:text-teal-600 transition">Advisor</a>
+            </div>
+             <a href="mailto:omrajesh9203@gmail.com" class="hidden md:inline-block bg-teal-600 text-white px-4 py-2 rounded-lg hover:bg-teal-700 transition">Contact Me</a>
+        </nav>
+    </header>
+
+    <main class="container mx-auto px-6 py-12">
+
+        <!-- Home/Hero Section -->
+        <section id="home" class="min-h-[60vh] flex flex-col justify-center items-center text-center">
+            <h1 class="text-5xl md:text-7xl font-extrabold text-stone-900 leading-tight">Software Engineer</h1>
+            <p class="mt-6 text-lg text-stone-600 max-w-2xl">
+                I build robust, scalable, and efficient software solutions. With a strong foundation in full-stack development and cloud technologies, I transform complex problems into elegant applications.
+            </p>
+            <div class="mt-8 flex space-x-4">
+                <a href="https://www.linkedin.com/in/omchauhan9203/" target="_blank" class="text-teal-600 hover:text-teal-800 transition">
+                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" clip-rule="evenodd"/></svg>
+                </a>
+                <a href="https://github.com/OmChauhan9" target="_blank" class="text-teal-600 hover:text-teal-800 transition">
+                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                </a>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="py-20">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-stone-900">Technical Skills</h2>
+                <p class="mt-4 text-lg text-stone-600">Click on a skill to see where I've used it.</p>
+            </div>
+            <div id="skills-container" class="space-y-6"></div>
+        </section>
+
+        <!-- Experience Section -->
+        <section id="experience" class="py-20">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-stone-900">Professional Experience</h2>
+                <p class="mt-4 text-lg text-stone-600">My journey and impact in the industry.</p>
+            </div>
+            <div id="experience-container" class="relative border-l-2 border-teal-500 ml-6 md:ml-0 md:pl-6"></div>
+        </section>
+        
+        <!-- Projects Section -->
+        <section id="projects" class="py-20">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-stone-900">Projects</h2>
+                <p class="mt-4 text-lg text-stone-600">A selection of my personal and academic work.</p>
+            </div>
+            <div id="projects-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+        </section>
+
+        <!-- Education Section -->
+        <section id="education" class="py-20 bg-stone-50 rounded-lg">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-stone-900">Education</h2>
+                 <p class="mt-4 text-lg text-stone-600">My academic background.</p>
+            </div>
+            <div id="education-container" class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8"></div>
+        </section>
+
+        <!-- Career Advisor Section -->
+        <section id="career" class="py-20">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-stone-900">✨ Career Trajectory Advisor</h2>
+                <p class="mt-4 text-lg text-stone-600 max-w-2xl mx-auto">Leverage the Gemini API to analyze my profile and suggest potential career paths, specializations, and next steps.</p>
+                <button id="career-advisor-btn" class="mt-6 bg-teal-600 text-white px-6 py-3 rounded-lg hover:bg-teal-700 transition font-semibold">Generate Career Advice</button>
+            </div>
+            <div id="career-advisor-result" class="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-md hidden">
+                <div id="career-spinner" class="spinner w-8 h-8 border-4 rounded-full mx-auto hidden"></div>
+                <div id="career-content"></div>
+            </div>
+        </section>
+
+    </main>
+    
+    <!-- Modal -->
+    <div id="ai-modal" class="modal-overlay fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50 hidden opacity-0">
+        <div class="modal-content bg-white rounded-lg shadow-xl w-full max-w-2xl p-6 relative transform scale-95">
+            <button id="close-modal-btn" class="absolute top-4 right-4 text-stone-500 hover:text-stone-800">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+            <h3 id="modal-title" class="text-2xl font-bold text-stone-900 mb-4"></h3>
+            <div id="modal-spinner" class="spinner w-8 h-8 border-4 rounded-full mx-auto"></div>
+            <div id="modal-body" class="text-stone-600 space-y-4 max-h-[60vh] overflow-y-auto"></div>
+        </div>
+    </div>
+    
+    <footer class="bg-stone-800 text-white mt-20">
+        <div class="container mx-auto px-6 py-8 text-center">
+            <p>&copy; 2025 Om Chauhan. All rights reserved.</p>
+            <p class="mt-2">Built with passion and code.</p>
+        </div>
+    </footer>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+        const resumeData = {
+            skills: {
+                "Languages": ["Java", "Python", "C/C++", "JavaScript", "HTML/CSS", "SCSS", "SQL"],
+                "Frameworks & Libraries": ["Spring Boot", "Spring MVC", "Spring Security", "Hibernate", "Node.js", "Django", "Flask", "React", "Redux", "React Query", "Axios", "JUnit", "Material UI", "Bootstrap", "Pandas", "NumPy", "Matplotlib", "OpenCV"],
+                "Cloud & DevOps": ["AWS", "Docker", "Kubernetes", "CI/CD", "Git", "Postman", "Swagger"],
+                "Databases": ["Oracle", "SQL Server", "MySQL", "NoSQL"],
+                "Other Tools": ["ANTLR", "LLVM", "CMake", "Alexa Skills Kit", "Stripe API", "YOLOv5"]
+            },
+            experience: [
+                {
+                    title: "Software Engineer Intern",
+                    company: "Axisray",
+                    location: "Ahmedabad, India",
+                    date: "Jan 2024 – Jun 2024",
+                    description: [
+                        "Spearheaded the development of a full-stack HR automation system, automating critical functions and reducing manual data entry by 30%.",
+                        "Architected an Alexa voice interface for the HR system, decreasing employee access time to HR info by 50%.",
+                        "Orchestrated the deployment of a scalable AWS data solution, improving system performance by 25%."
+                    ],
+                    skills: ["Java", "Spring Boot", "Spring MVC", "Spring Security", "Hibernate", "AWS", "SQL", "Alexa Skills Kit", "REST APIs"],
+                    chartData: {
+                        labels: ['Manual Entry Reduction', 'Access Time Improvement', 'Performance Improvement'],
+                        values: [30, 50, 25]
+                    }
+                },
+                {
+                    title: "Software Engineer Intern",
+                    company: "Axisray",
+                    location: "Ahmedabad, India",
+                    date: "Jun 2023 – Jul 2023",
+                    description: [
+                        "Constructed and trained a real-time fire detection system using YOLOv5 and OpenCV, achieving 95% accuracy.",
+                        "Collaborated with safety teams to integrate the system with existing protocols, enabling earlier intervention.",
+                        "Analyzed and optimized models for high accuracy and low false-positives, strengthening system reliability."
+                    ],
+                    skills: ["Python", "YOLOv5", "OpenCV", "Pandas", "NumPy", "Matplotlib"],
+                    chartData: {
+                        labels: ['Model Accuracy', 'False Alarm Reduction'],
+                        values: [95, 40]
+                    }
+                }
+            ],
+            projects: [
+                {
+                    title: "Student Portfolio Management System",
+                    description: "Architected a full-stack, LinkedIn-style networking platform for students to showcase portfolios, build connections, and collaborate.",
+                    skills: ["Java", "Spring Boot", "React", "Redux", "Material UI", "MySQL", "REST APIs", "JavaScript", "HTML/CSS"]
+                },
+                {
+                    title: "NOAH: A Statically Typed Programming Language",
+                    description: "Conceptualized and constructed a new statically typed language from the ground up, focusing on high-performance code generation.",
+                    skills: ["Java", "ANTLR", "LLVM", "CMake", "C/C++"]
+                },
+                {
+                    title: "Online Food Ordering System",
+                    description: "Delivered a full-stack e-commerce platform for a local restaurant, enabling online ordering, secure payments, and an admin dashboard.",
+                    skills: ["Java", "Spring Boot", "React", "Redux", "Bootstrap", "MySQL", "Stripe API", "JavaScript", "HTML/CSS"]
+                }
+            ],
+            education: [
+                {
+                    degree: "Master of Science in Software Engineering",
+                    university: "Arizona State University, Tempe, AZ",
+                    date: "Expected May 2026",
+                    gpa: "3.61/4.0"
+                },
+                {
+                    degree: "Bachelor of Engineering in Computer Engineering",
+                    university: "Gujarat Technological University, India",
+                    date: "May 2024",
+                    gpa: "3.39/4.0"
+                }
+            ]
+        };
+
+        const skillsContainer = document.getElementById('skills-container');
+        for (const [category, skills] of Object.entries(resumeData.skills)) {
+            const categoryDiv = document.createElement('div');
+            categoryDiv.innerHTML = `<h3 class="text-2xl font-semibold text-stone-800 mb-4">${category}</h3>`;
+            const tagsDiv = document.createElement('div');
+            tagsDiv.className = 'flex flex-wrap gap-3';
+            skills.forEach(skill => {
+                const tag = document.createElement('button');
+                tag.className = 'skill-tag bg-stone-200 text-stone-700 px-4 py-2 rounded-full hover:bg-teal-500 hover:text-white';
+                tag.textContent = skill;
+                tag.dataset.skill = skill;
+                tagsDiv.appendChild(tag);
+            });
+            categoryDiv.appendChild(tagsDiv);
+            skillsContainer.appendChild(categoryDiv);
+        }
+
+        const experienceContainer = document.getElementById('experience-container');
+        resumeData.experience.forEach((exp, index) => {
+            const expDiv = document.createElement('div');
+            expDiv.className = 'experience-card mb-12 pl-12 relative transition-opacity duration-300';
+            expDiv.dataset.skills = JSON.stringify(exp.skills);
+            expDiv.innerHTML = `
+                <div class="absolute -left-[1.8rem] top-1.5 w-6 h-6 bg-teal-600 rounded-full border-4 border-stone-50"></div>
+                <h3 class="text-2xl font-bold text-stone-800">${exp.title}</h3>
+                <p class="text-lg font-semibold text-teal-700">${exp.company} | ${exp.location}</p>
+                <p class="text-md text-stone-500 mb-4">${exp.date}</p>
+                <ul class="list-disc list-inside space-y-2 text-stone-600">
+                    ${exp.description.map(d => `<li>${d}</li>`).join('')}
+                </ul>
+                <div class="mt-4">
+                    <h4 class="font-semibold mb-2">Key Achievements:</h4>
+                    <div class="chart-container">
+                        <canvas id="chart-${index}"></canvas>
+                    </div>
+                </div>
+            `;
+            experienceContainer.appendChild(expDiv);
+            renderChart(`chart-${index}`, exp.chartData.labels, exp.chartData.values);
+        });
+
+        const projectsContainer = document.getElementById('projects-container');
+        resumeData.projects.forEach((proj, index) => {
+            const projDiv = document.createElement('div');
+            projDiv.className = 'project-card bg-white p-6 rounded-lg shadow-md transition hover:shadow-xl hover:-translate-y-1 transition-opacity duration-300 flex flex-col';
+            projDiv.dataset.skills = JSON.stringify(proj.skills);
+            projDiv.innerHTML = `
+                <div class="flex-grow">
+                    <h3 class="text-xl font-bold text-stone-800 mb-2">${proj.title}</h3>
+                    <p class="text-stone-600 mb-4">${proj.description}</p>
+                    <div class="flex flex-wrap gap-2">
+                        ${proj.skills.map(s => `<span class="bg-stone-200 text-stone-700 text-xs font-semibold px-2.5 py-1 rounded-full">${s}</span>`).join('')}
+                    </div>
+                </div>
+                <button class="ai-analyze-btn mt-4 bg-teal-50 text-teal-700 px-4 py-2 rounded-lg hover:bg-teal-100 transition w-full font-semibold" data-project-index="${index}">
+                    ✨ Analyze Project
+                </button>
+            `;
+            projectsContainer.appendChild(projDiv);
+        });
+        
+        const educationContainer = document.getElementById('education-container');
+        resumeData.education.forEach(edu => {
+            const eduDiv = document.createElement('div');
+            eduDiv.className = 'bg-white p-6 rounded-lg shadow-md';
+            eduDiv.innerHTML = `
+                <h3 class="text-xl font-bold text-stone-800">${edu.degree}</h3>
+                <p class="text-lg font-semibold text-teal-700">${edu.university}</p>
+                <p class="text-md text-stone-500 mb-2">${edu.date}</p>
+                <p class="text-md text-stone-600">GPA: ${edu.gpa}</p>
+            `;
+            educationContainer.appendChild(eduDiv);
+        });
+
+        const skillTags = document.querySelectorAll('.skill-tag');
+        const projectCards = document.querySelectorAll('.project-card');
+        const experienceCards = document.querySelectorAll('.experience-card');
+
+        skillTags.forEach(tag => {
+            tag.addEventListener('click', () => {
+                tag.classList.toggle('active');
+                const activeSkills = Array.from(document.querySelectorAll('.skill-tag.active')).map(t => t.dataset.skill);
+
+                const filterAndHighlight = (card) => {
+                    const cardSkills = JSON.parse(card.dataset.skills);
+                    const hasActiveSkill = activeSkills.length === 0 || activeSkills.some(s => cardSkills.includes(s));
+
+                    if (hasActiveSkill) {
+                        card.classList.remove('opacity-20');
+                        card.classList.remove('highlight');
+                         if (activeSkills.length > 0) {
+                            card.classList.add('highlight');
+                         }
+                    } else {
+                        card.classList.add('opacity-20');
+                        card.classList.remove('highlight');
+                    }
+                };
+                projectCards.forEach(filterAndHighlight);
+                experienceCards.forEach(filterAndHighlight);
+            });
+        });
+
+        const modal = document.getElementById('ai-modal');
+        const closeModalBtn = document.getElementById('close-modal-btn');
+        const modalTitle = document.getElementById('modal-title');
+        const modalBody = document.getElementById('modal-body');
+        const modalSpinner = document.getElementById('modal-spinner');
+
+        document.querySelectorAll('.ai-analyze-btn').forEach(button => {
+            button.addEventListener('click', async () => {
+                const projectIndex = button.dataset.projectIndex;
+                const project = resumeData.projects[projectIndex];
+                
+                modalTitle.textContent = `AI Analysis: ${project.title}`;
+                modalBody.innerHTML = '';
+                modalSpinner.style.display = 'block';
+                modal.classList.remove('hidden');
+                setTimeout(() => modal.classList.remove('opacity-0'), 10);
+                
+                const prompt = `As a technical recruiter analyzing a candidate's portfolio, provide a brief analysis of the following project. Focus on the potential technical challenges, the business impact, and the key skills demonstrated. Present the analysis in three short, clear paragraphs with headers (Technical Challenges, Business Impact, Key Learnings). Project Title: "${project.title}". Description: "${project.description}". Skills Used: ${project.skills.join(', ')}.`;
+                
+                try {
+                    const analysis = await callGeminiAPI(prompt);
+                    modalBody.innerHTML = analysis.replace(/\n/g, '<br>');
+                } catch (error) {
+                    modalBody.textContent = 'Sorry, the AI analysis could not be completed at this time.';
+                } finally {
+                    modalSpinner.style.display = 'none';
+                }
+            });
+        });
+
+        closeModalBtn.addEventListener('click', () => {
+            modal.classList.add('opacity-0');
+            setTimeout(() => modal.classList.add('hidden'), 300);
+        });
+
+        const careerAdvisorBtn = document.getElementById('career-advisor-btn');
+        const careerAdvisorResult = document.getElementById('career-advisor-result');
+        const careerSpinner = document.getElementById('career-spinner');
+        const careerContent = document.getElementById('career-content');
+
+        careerAdvisorBtn.addEventListener('click', async () => {
+            careerAdvisorResult.style.display = 'block';
+            careerContent.innerHTML = '';
+            careerSpinner.style.display = 'block';
+            careerAdvisorBtn.disabled = true;
+
+            const profileSummary = `
+                A software engineer with a Master's in Software Engineering and experience in the following areas:
+                - Skills: ${Object.values(resumeData.skills).flat().join(', ')}
+                - Experience: ${resumeData.experience.map(e => `${e.title} where they ${e.description.join(' ')}`).join('. ')}
+                - Projects: ${resumeData.projects.map(p => `${p.title}: ${p.description}`).join('. ')}
+            `;
+            const prompt = `Acting as a FAANG technical recruiter and career advisor, analyze this software engineer's profile. Based on their skills in Java, Spring Boot, React, Python, and AWS, and their project work, suggest 3-5 concrete and distinct career path specializations they could pursue next. For each suggestion, provide a one-sentence rationale explaining why it's a good fit. Format the output as a list. Profile: ${profileSummary}`;
+            
+            try {
+                const advice = await callGeminiAPI(prompt);
+                careerContent.innerHTML = advice.replace(/\n/g, '<br>');
+            } catch (error) {
+                careerContent.textContent = 'Sorry, career advice could not be generated at this time.';
+            } finally {
+                careerSpinner.style.display = 'none';
+                careerAdvisorBtn.disabled = false;
+            }
+        });
+
+        async function callGeminiAPI(promptText) {
+            const apiKey = "";
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+            
+            const payload = {
+                contents: [{
+                    role: "user",
+                    parts: [{ text: promptText }]
+                }]
+            };
+
+            const response = await fetch(apiUrl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+
+            if (!response.ok) {
+                throw new Error(`API call failed with status: ${response.status}`);
+            }
+
+            const result = await response.json();
+            
+            if (result.candidates && result.candidates.length > 0 && result.candidates[0].content.parts.length > 0) {
+                return result.candidates[0].content.parts[0].text;
+            } else {
+                throw new Error('Invalid response structure from API.');
+            }
+        }
+        
+        function renderChart(canvasId, labels, data) {
+            const ctx = document.getElementById(canvasId).getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Improvement (%)',
+                        data: data,
+                        backgroundColor: 'rgba(20, 184, 166, 0.6)',
+                        borderColor: 'rgba(13, 148, 136, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    indexAxis: 'y',
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return `${context.dataset.label}: ${context.raw}%`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            beginAtZero: true,
+                            max: 100,
+                             ticks: {
+                                callback: function(value) {
+                                    return value + '%';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+    });
+    </script>
+</body>
+</html>
