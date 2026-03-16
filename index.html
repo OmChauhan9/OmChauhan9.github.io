@@ -1,485 +1,1270 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Om Chauhan | Software Engineer</title>
-    <!-- Chosen Palette: Warm Neutrals -->
-    <!-- Application Structure Plan: A single-page portfolio with a fixed top navigation bar for smooth scrolling to sections: Home, Skills, Experience, Projects, and Education. This structure creates a narrative flow, guiding the user from a high-level summary to detailed evidence. An interactive skills dashboard allows recruiters to filter projects and experience by technology, directly connecting abilities to accomplishments. Key metrics in the experience section are visualized with charts to make impact more memorable. This user-centric design prioritizes scannability while rewarding deeper exploration, which is ideal for busy recruiters. -->
-    <!-- Visualization & Content Choices: 1. Skills: Presented as interactive filter buttons (HTML/CSS/JS) to organize content and show relationships between skills and work. 2. Experience Metrics: Small bar charts (Chart.js) are used to visually represent quantifiable achievements (e.g., "30% reduction"), making the impact more concrete and engaging than text alone. 3. Projects: A responsive grid of cards (HTML/CSS) to organize the portfolio cleanly. 4. Timeline: A vertical timeline (HTML/CSS) for experience to show career progression. This combination of interactive elements and data visualization turns a static resume into an engaging story of professional growth. -->
-    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #F5F5F4; /* stone-100 */
-            color: #292524; /* stone-800 */
-        }
-        @import url('https://rsms.me/inter/inter.css');
-        .skill-tag {
-            transition: all 0.2s ease-in-out;
-        }
-        .skill-tag.active {
-            background-color: #0D9488; /* teal-600 */
-            color: white;
-            transform: scale(1.05);
-        }
-        .highlight {
-            box-shadow: 0 0 0 3px #14B8A6; /* teal-500 */
-            border-radius: 0.5rem;
-            transition: box-shadow 0.3s ease-in-out;
-        }
-        .chart-container {
-            position: relative;
-            width: 100%;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-            height: 250px;
-            max-height: 300px;
-        }
-        .modal-overlay {
-            transition: opacity 0.3s ease;
-        }
-        .modal-content {
-            transition: transform 0.3s ease;
-        }
-        .spinner {
-            border-top-color: #0D9488;
-            animation: spin 1s linear infinite;
-        }
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-    </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Om Chauhan — Software Engineer</title>
+<meta name="description" content="Om Chauhan — Software Engineer specializing in scalable backend systems, cloud infrastructure, and real-time applications. MS Software Engineering @ ASU." />
+<meta property="og:title" content="Om Chauhan — Software Engineer" />
+<meta property="og:description" content="Building scalable systems that handle real-world load. MS Software Engineering @ ASU." />
+<meta property="og:type" content="website" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #0c0c0f;
+    --bg2: #111116;
+    --bg3: #17171e;
+    --surface: #1c1c25;
+    --surface2: #22222d;
+    --border: rgba(255,255,255,0.07);
+    --border2: rgba(255,255,255,0.12);
+    --text: #f0f0f5;
+    --text2: #9898a8;
+    --text3: #5a5a6e;
+    --accent: #6ee7b7;
+    --accent2: #34d399;
+    --accent-dim: rgba(110,231,183,0.08);
+    --accent-dim2: rgba(110,231,183,0.15);
+    --red: #f87171;
+    --blue: #93c5fd;
+    --amber: #fbbf24;
+    --font-display: 'Syne', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
+    --font-mono: 'DM Mono', monospace;
+    --radius: 12px;
+    --radius-sm: 6px;
+    --max: 1100px;
+    --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  ::selection { background: var(--accent-dim2); color: var(--accent); }
+
+  a { color: inherit; text-decoration: none; }
+
+  /* ─── NOISE OVERLAY ─── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.4;
+  }
+
+  /* ─── LAYOUT ─── */
+  .wrap { max-width: var(--max); margin: 0 auto; padding: 0 2rem; position: relative; z-index: 1; }
+
+  section { padding: 7rem 0; }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 1.2rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    background: rgba(12,12,15,0.7);
+    border-bottom: 1px solid var(--border);
+    transition: all 0.3s var(--ease);
+  }
+
+  .nav-logo {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.1rem;
+    letter-spacing: -0.02em;
+    color: var(--text);
+  }
+
+  .nav-logo span { color: var(--accent); }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 0.875rem;
+    font-weight: 400;
+    color: var(--text2);
+    letter-spacing: 0.02em;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--accent); }
+
+  .nav-cta {
+    font-size: 0.8rem;
+    font-weight: 500;
+    padding: 0.5rem 1.2rem;
+    border: 1px solid var(--border2);
+    border-radius: 100px;
+    color: var(--text);
+    background: var(--surface);
+    transition: all 0.2s var(--ease);
+    cursor: pointer;
+    font-family: var(--font-body);
+  }
+
+  .nav-cta:hover { background: var(--accent-dim2); border-color: var(--accent); color: var(--accent); }
+
+  /* ─── HERO ─── */
+  #hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-grid-bg {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(110,231,183,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(110,231,183,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, black 30%, transparent 100%);
+    pointer-events: none;
+  }
+
+  .hero-glow {
+    position: absolute;
+    width: 600px; height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(110,231,183,0.06) 0%, transparent 70%);
+    top: -100px; right: -100px;
+    pointer-events: none;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--accent);
+    background: var(--accent-dim);
+    border: 1px solid rgba(110,231,183,0.2);
+    border-radius: 100px;
+    padding: 0.35rem 1rem;
+    margin-bottom: 1.5rem;
+    font-family: var(--font-mono);
+    letter-spacing: 0.05em;
+  }
+
+  .hero-badge::before { content: '●'; font-size: 0.5rem; animation: blink 2s infinite; }
+
+  @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
+
+  .hero-title {
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 8vw, 6.5rem);
+    font-weight: 800;
+    line-height: 0.95;
+    letter-spacing: -0.04em;
+    color: var(--text);
+    margin-bottom: 1rem;
+  }
+
+  .hero-title .line2 {
+    display: block;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--blue) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-sub {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    color: var(--text2);
+    max-width: 540px;
+    margin-bottom: 2.5rem;
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-bottom: 4rem;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.8rem 1.75rem;
+    background: var(--accent);
+    color: #0c0c0f;
+    font-weight: 600;
+    font-size: 0.9rem;
+    border-radius: 100px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s var(--ease);
+    font-family: var(--font-body);
+  }
+
+  .btn-primary:hover { background: #a7f3d0; transform: translateY(-1px); }
+
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.8rem 1.75rem;
+    background: transparent;
+    color: var(--text);
+    font-weight: 400;
+    font-size: 0.9rem;
+    border-radius: 100px;
+    border: 1px solid var(--border2);
+    cursor: pointer;
+    transition: all 0.2s var(--ease);
+    font-family: var(--font-body);
+  }
+
+  .btn-ghost:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-1px); }
+
+  .hero-stats {
+    display: flex;
+    gap: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .stat-item {}
+  .stat-num {
+    font-family: var(--font-display);
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -0.03em;
+  }
+  .stat-num span { color: var(--accent); }
+  .stat-label { font-size: 0.8rem; color: var(--text3); margin-top: 0.1rem; }
+
+  /* ─── SECTION HEADER ─── */
+  .section-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+  }
+
+  .section-tag::before { content: '//'; opacity: 0.5; }
+
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw, 2.75rem);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: var(--text);
+    line-height: 1.1;
+  }
+
+  .section-desc {
+    color: var(--text2);
+    margin-top: 0.75rem;
+    max-width: 500px;
+    font-size: 1rem;
+    font-weight: 300;
+  }
+
+  /* ─── EXPERIENCE ─── */
+  #experience { background: var(--bg); }
+
+  .exp-timeline { margin-top: 3.5rem; position: relative; }
+
+  .exp-timeline::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0; bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--accent), transparent);
+    opacity: 0.3;
+  }
+
+  .exp-item {
+    padding: 0 0 3rem 2.5rem;
+    position: relative;
+  }
+
+  .exp-item::before {
+    content: '';
+    position: absolute;
+    left: -4px;
+    top: 6px;
+    width: 9px; height: 9px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 12px rgba(110,231,183,0.5);
+  }
+
+  .exp-meta {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .exp-role {
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--text);
+  }
+
+  .exp-company {
+    font-size: 0.875rem;
+    color: var(--accent);
+    margin-top: 0.1rem;
+  }
+
+  .exp-date {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--text3);
+    white-space: nowrap;
+    padding: 0.25rem 0.75rem;
+    background: var(--surface);
+    border-radius: 100px;
+    border: 1px solid var(--border);
+  }
+
+  .exp-bullets {
+    list-style: none;
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .exp-bullets li {
+    font-size: 0.925rem;
+    color: var(--text2);
+    padding-left: 1.25rem;
+    position: relative;
+    line-height: 1.6;
+  }
+
+  .exp-bullets li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-size: 0.7rem;
+    top: 0.25rem;
+  }
+
+  .exp-bullets li strong { color: var(--text); font-weight: 500; }
+
+  /* ─── PROJECTS ─── */
+  #projects { background: var(--bg2); }
+
+  .projects-grid {
+    margin-top: 3.5rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .project-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.75rem;
+    transition: all 0.3s var(--ease);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .project-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, var(--accent-dim) 0%, transparent 50%);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .project-card:hover {
+    border-color: var(--border2);
+    transform: translateY(-3px);
+  }
+
+  .project-card:hover::before { opacity: 1; }
+
+  .project-card.featured {
+    border-color: rgba(110,231,183,0.2);
+    background: linear-gradient(135deg, rgba(110,231,183,0.04) 0%, var(--surface) 100%);
+  }
+
+  .project-featured-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--accent);
+    background: var(--accent-dim);
+    border: 1px solid rgba(110,231,183,0.2);
+    border-radius: 100px;
+    padding: 0.2rem 0.65rem;
+    margin-bottom: 1rem;
+    width: fit-content;
+    letter-spacing: 0.05em;
+  }
+
+  .project-num {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--text3);
+    margin-bottom: 0.75rem;
+  }
+
+  .project-name {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.02em;
+    line-height: 1.3;
+  }
+
+  .project-desc {
+    font-size: 0.875rem;
+    color: var(--text2);
+    line-height: 1.65;
+    margin-bottom: 1.25rem;
+    flex: 1;
+    font-weight: 300;
+  }
+
+  .project-impact {
+    font-size: 0.825rem;
+    color: var(--accent);
+    background: var(--accent-dim);
+    border: 1px solid rgba(110,231,183,0.15);
+    border-radius: var(--radius-sm);
+    padding: 0.5rem 0.75rem;
+    margin-bottom: 1.25rem;
+    font-weight: 500;
+  }
+
+  .project-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .tag {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    padding: 0.25rem 0.6rem;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    color: var(--text3);
+    letter-spacing: 0.02em;
+  }
+
+  .project-links {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: auto;
+  }
+
+  .project-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.8rem;
+    color: var(--text2);
+    border: 1px solid var(--border);
+    padding: 0.4rem 0.9rem;
+    border-radius: 100px;
+    transition: all 0.2s;
+    font-weight: 400;
+  }
+
+  .project-link:hover { color: var(--accent); border-color: var(--accent); }
+
+  /* ─── SKILLS ─── */
+  #skills { background: var(--bg); }
+
+  .skills-grid {
+    margin-top: 3.5rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .skill-group {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+  }
+
+  .skill-group-title {
+    font-family: var(--font-display);
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--accent);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    font-size: 0.78rem;
+  }
+
+  .skill-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .skill-tag {
+    font-size: 0.8rem;
+    padding: 0.3rem 0.7rem;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    color: var(--text2);
+    transition: all 0.2s;
+  }
+
+  .skill-tag:hover { color: var(--accent); border-color: rgba(110,231,183,0.3); }
+
+  /* ─── EDUCATION ─── */
+  #education { background: var(--bg2); }
+
+  .edu-grid {
+    margin-top: 3.5rem;
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .edu-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.75rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .edu-school {
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -0.02em;
+  }
+
+  .edu-degree {
+    font-size: 0.9rem;
+    color: var(--text2);
+    margin-top: 0.25rem;
+  }
+
+  .edu-gpa {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--accent);
+    background: var(--accent-dim);
+    border: 1px solid rgba(110,231,183,0.2);
+    border-radius: 100px;
+    padding: 0.35rem 1rem;
+    white-space: nowrap;
+    align-self: center;
+  }
+
+  /* ─── ABOUT ─── */
+  #about { background: var(--bg); }
+
+  .about-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+    margin-top: 3.5rem;
+  }
+
+  .about-text p {
+    color: var(--text2);
+    font-size: 1rem;
+    line-height: 1.8;
+    margin-bottom: 1rem;
+    font-weight: 300;
+  }
+
+  .about-text p strong { color: var(--text); font-weight: 500; }
+
+  .about-highlights {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .highlight-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    transition: all 0.2s;
+  }
+
+  .highlight-card:hover { border-color: var(--border2); }
+
+  .highlight-icon {
+    width: 36px; height: 36px;
+    border-radius: 8px;
+    background: var(--accent-dim);
+    border: 1px solid rgba(110,231,183,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    flex-shrink: 0;
+  }
+
+  .highlight-title {
+    font-weight: 500;
+    font-size: 0.9rem;
+    color: var(--text);
+    margin-bottom: 0.25rem;
+  }
+
+  .highlight-body {
+    font-size: 0.825rem;
+    color: var(--text2);
+    line-height: 1.5;
+    font-weight: 300;
+  }
+
+  /* ─── CONTACT ─── */
+  #contact { background: var(--bg2); }
+
+  .contact-inner {
+    margin-top: 3.5rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 4rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .contact-inner::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 60% 40% at 50% 0%, rgba(110,231,183,0.07) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .contact-title {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    color: var(--text);
+    margin-bottom: 1rem;
+  }
+
+  .contact-title span { color: var(--accent); }
+
+  .contact-desc {
+    color: var(--text2);
+    max-width: 480px;
+    margin: 0 auto 2.5rem;
+    font-size: 1rem;
+    font-weight: 300;
+  }
+
+  .contact-links {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 3rem;
+  }
+
+  .contact-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    border: 1px solid var(--border2);
+    border-radius: 100px;
+    color: var(--text2);
+    font-size: 0.875rem;
+    transition: all 0.2s;
+  }
+
+  .contact-link:hover { color: var(--accent); border-color: var(--accent); }
+
+  .contact-email {
+    font-family: var(--font-mono);
+    font-size: 1.1rem;
+    color: var(--accent);
+    letter-spacing: -0.01em;
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    padding: 2rem;
+    border-top: 1px solid var(--border);
+    text-align: center;
+  }
+
+  .footer-text {
+    font-size: 0.8rem;
+    color: var(--text3);
+    font-family: var(--font-mono);
+  }
+
+  /* ─── SCROLL ANIMATIONS ─── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .hero-stats { gap: 1.5rem; }
+    .about-layout { grid-template-columns: 1fr; gap: 2.5rem; }
+    .contact-inner { padding: 2.5rem 1.5rem; }
+    section { padding: 5rem 0; }
+    .wrap { padding: 0 1.25rem; }
+    .projects-grid { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 500px) {
+    .hero-title { font-size: clamp(2.5rem, 12vw, 4rem); }
+  }
+
+  /* ─── CURSOR DOT ─── */
+  .cursor-dot {
+    width: 6px; height: 6px;
+    background: var(--accent);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s, width 0.2s, height 0.2s, opacity 0.2s;
+    mix-blend-mode: screen;
+  }
+
+  /* ─── SCROLLBAR ─── */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--surface2); border-radius: 4px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+</style>
 </head>
-<body class="antialiased">
+<body>
 
-    <!-- Header & Navigation -->
-    <header class="bg-stone-50/80 backdrop-blur-sm sticky top-0 z-50 shadow-sm">
-        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#home" class="text-2xl font-bold text-stone-800">Om Chauhan</a>
-            <div class="hidden md:flex items-center space-x-8">
-                <a href="#skills" class="text-stone-600 hover:text-teal-600 transition">Skills</a>
-                <a href="#experience" class="text-stone-600 hover:text-teal-600 transition">Experience</a>
-                <a href="#projects" class="text-stone-600 hover:text-teal-600 transition">Projects</a>
-                <a href="#education" class="text-stone-600 hover:text-teal-600 transition">Education</a>
-                <a href="#career" class="text-stone-600 hover:text-teal-600 transition">Advisor</a>
-            </div>
-             <a href="mailto:omrajesh9203@gmail.com" class="hidden md:inline-block bg-teal-600 text-white px-4 py-2 rounded-lg hover:bg-teal-700 transition">Contact Me</a>
-        </nav>
-    </header>
+<!-- CURSOR -->
+<div class="cursor-dot" id="cursor"></div>
 
-    <main class="container mx-auto px-6 py-12">
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Om<span>.</span></div>
+  <ul class="nav-links">
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#about">About</a></li>
+  </ul>
+  <a href="mailto:omrajesh9203@gmail.com" class="nav-cta">Get in touch →</a>
+</nav>
 
-        <!-- Home/Hero Section -->
-        <section id="home" class="min-h-[60vh] flex flex-col justify-center items-center text-center">
-            <h1 class="text-5xl md:text-7xl font-extrabold text-stone-900 leading-tight">Software Engineer</h1>
-            <p class="mt-6 text-lg text-stone-600 max-w-2xl">
-                I build robust, scalable, and efficient software solutions. With a strong foundation in full-stack development and cloud technologies, I transform complex problems into elegant applications.
-            </p>
-            <div class="mt-8 flex space-x-4">
-                <a href="https://www.linkedin.com/in/omchauhan9203/" target="_blank" class="text-teal-600 hover:text-teal-800 transition">
-                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" clip-rule="evenodd"/></svg>
-                </a>
-                <a href="https://github.com/OmChauhan9" target="_blank" class="text-teal-600 hover:text-teal-800 transition">
-                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
-                </a>
-            </div>
-        </section>
-
-        <!-- Skills Section -->
-        <section id="skills" class="py-20">
-            <div class="text-center mb-12">
-                <h2 class="text-4xl font-bold text-stone-900">Technical Skills</h2>
-                <p class="mt-4 text-lg text-stone-600">Click on a skill to see where I've used it.</p>
-            </div>
-            <div id="skills-container" class="space-y-6"></div>
-        </section>
-
-        <!-- Experience Section -->
-        <section id="experience" class="py-20">
-            <div class="text-center mb-12">
-                <h2 class="text-4xl font-bold text-stone-900">Professional Experience</h2>
-                <p class="mt-4 text-lg text-stone-600">My journey and impact in the industry.</p>
-            </div>
-            <div id="experience-container" class="relative border-l-2 border-teal-500 ml-6 md:ml-0 md:pl-6"></div>
-        </section>
-        
-        <!-- Projects Section -->
-        <section id="projects" class="py-20">
-            <div class="text-center mb-12">
-                <h2 class="text-4xl font-bold text-stone-900">Projects</h2>
-                <p class="mt-4 text-lg text-stone-600">A selection of my personal and academic work.</p>
-            </div>
-            <div id="projects-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
-        </section>
-
-        <!-- Education Section -->
-        <section id="education" class="py-20 bg-stone-50 rounded-lg">
-            <div class="text-center mb-12">
-                <h2 class="text-4xl font-bold text-stone-900">Education</h2>
-                 <p class="mt-4 text-lg text-stone-600">My academic background.</p>
-            </div>
-            <div id="education-container" class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8"></div>
-        </section>
-
-        <!-- Career Advisor Section -->
-        <section id="career" class="py-20">
-            <div class="text-center mb-12">
-                <h2 class="text-4xl font-bold text-stone-900">✨ Career Trajectory Advisor</h2>
-                <p class="mt-4 text-lg text-stone-600 max-w-2xl mx-auto">Leverage the Gemini API to analyze my profile and suggest potential career paths, specializations, and next steps.</p>
-                <button id="career-advisor-btn" class="mt-6 bg-teal-600 text-white px-6 py-3 rounded-lg hover:bg-teal-700 transition font-semibold">Generate Career Advice</button>
-            </div>
-            <div id="career-advisor-result" class="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-md hidden">
-                <div id="career-spinner" class="spinner w-8 h-8 border-4 rounded-full mx-auto hidden"></div>
-                <div id="career-content"></div>
-            </div>
-        </section>
-
-    </main>
-    
-    <!-- Modal -->
-    <div id="ai-modal" class="modal-overlay fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50 hidden opacity-0">
-        <div class="modal-content bg-white rounded-lg shadow-xl w-full max-w-2xl p-6 relative transform scale-95">
-            <button id="close-modal-btn" class="absolute top-4 right-4 text-stone-500 hover:text-stone-800">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-            </button>
-            <h3 id="modal-title" class="text-2xl font-bold text-stone-900 mb-4"></h3>
-            <div id="modal-spinner" class="spinner w-8 h-8 border-4 rounded-full mx-auto"></div>
-            <div id="modal-body" class="text-stone-600 space-y-4 max-h-[60vh] overflow-y-auto"></div>
-        </div>
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-grid-bg"></div>
+  <div class="hero-glow"></div>
+  <div class="wrap">
+    <div class="hero-badge">Available for opportunities · Tempe, AZ</div>
+    <h1 class="hero-title">
+      Om Chauhan
+      <span class="line2">Software Engineer</span>
+    </h1>
+    <p class="hero-sub">
+      I build scalable backend systems, cloud infrastructure, and real-time applications — from distributed microservices to compiler internals. Currently pursuing MS Software Engineering at ASU (GPA 3.78).
+    </p>
+    <div class="hero-actions">
+      <a href="#projects" class="btn-primary">View Projects ↓</a>
+      <a href="https://github.com/OmChauhan9" target="_blank" class="btn-ghost">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+        GitHub
+      </a>
+      <a href="https://www.linkedin.com/in/om-chauhan-9a567623b/" target="_blank" class="btn-ghost">LinkedIn</a>
     </div>
-    
-    <footer class="bg-stone-800 text-white mt-20">
-        <div class="container mx-auto px-6 py-8 text-center">
-            <p>&copy; 2025 Om Chauhan. All rights reserved.</p>
-            <p class="mt-2">Built with passion and code.</p>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <div class="stat-num">3.78<span>/4.0</span></div>
+        <div class="stat-label">Graduate GPA</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">8<span>+</span></div>
+        <div class="stat-label">Projects shipped</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">1<span>yr</span></div>
+        <div class="stat-label">Industry experience</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">15<span>+</span></div>
+        <div class="stat-label">Technologies</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="section-tag">Experience</div>
+      <h2 class="section-title">Where I've worked</h2>
+      <p class="section-desc">Engineering impact across HR automation, AI vision systems, and cloud infrastructure.</p>
+    </div>
+    <div class="exp-timeline">
+      <div class="exp-item reveal">
+        <div class="exp-meta">
+          <div>
+            <div class="exp-role">Software Engineer Intern</div>
+            <div class="exp-company">Axisray · Ahmedabad, India</div>
+          </div>
+          <div class="exp-date">Jan 2024 – Jun 2024</div>
         </div>
-    </footer>
+        <ul class="exp-bullets">
+          <li>Reduced manual data entry by <strong>30%</strong> for a 50+ person team by leading end-to-end development of a scalable fullstack HR automation system.</li>
+          <li>Decreased time to access HR information by <strong>50%</strong> by architecting an Alexa voice interface that streamlined internal queries.</li>
+          <li>Improved system reliability by <strong>25%</strong> and ensured <strong>99.9% uptime</strong> by engineering a secure AWS data management solution (EC2, S3, RDS) with comprehensive JUnit testing.</li>
+          <li>Enabled <strong>50% faster feature shipment</strong> and reduced deployment errors to near-zero by automating build and deployment with Docker and CI/CD pipelines.</li>
+        </ul>
+      </div>
+      <div class="exp-item reveal">
+        <div class="exp-meta">
+          <div>
+            <div class="exp-role">Software Engineer Intern</div>
+            <div class="exp-company">Axisray · Ahmedabad, India</div>
+          </div>
+          <div class="exp-date">Jun 2023 – Aug 2023</div>
+        </div>
+        <ul class="exp-bullets">
+          <li>Achieved <strong>95% detection accuracy</strong> and reduced false alarms by <strong>40%</strong> by developing and optimizing a real-time fire detection system using YOLOv5 and OpenCV.</li>
+          <li>Reduced emergency response time by <strong>60%</strong> by collaborating with cross-functional safety teams to design and deploy software components integrated with existing protocols.</li>
+          <li>Increased effective detection range by <strong>15%</strong> in diverse environments by analyzing and tuning detection models for high accuracy and low false-positive rates.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <script>
-    document.addEventListener('DOMContentLoaded', () => {
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="section-tag">Projects</div>
+      <h2 class="section-title">Things I've built</h2>
+      <p class="section-desc">A selection of work spanning real-time systems, cloud-native architecture, and language design.</p>
+    </div>
+    <div class="projects-grid">
 
-        const resumeData = {
-            skills: {
-                "Languages": ["Java", "Python", "C/C++", "JavaScript", "HTML/CSS", "SCSS", "SQL"],
-                "Frameworks & Libraries": ["Spring Boot", "Spring MVC", "Spring Security", "Hibernate", "Node.js", "Django", "Flask", "React", "Redux", "React Query", "Axios", "JUnit", "Material UI", "Bootstrap", "Pandas", "NumPy", "Matplotlib", "OpenCV"],
-                "Cloud & DevOps": ["AWS", "Docker", "Kubernetes", "CI/CD", "Git", "Postman", "Swagger"],
-                "Databases": ["Oracle", "SQL Server", "MySQL", "NoSQL"],
-                "Other Tools": ["ANTLR", "LLVM", "CMake", "Alexa Skills Kit", "Stripe API", "YOLOv5"]
-            },
-            experience: [
-                {
-                    title: "Software Engineer Intern",
-                    company: "Axisray",
-                    location: "Ahmedabad, India",
-                    date: "Jan 2024 – Jun 2024",
-                    description: [
-                        "Spearheaded the development of a full-stack HR automation system, automating critical functions and reducing manual data entry by 30%.",
-                        "Architected an Alexa voice interface for the HR system, decreasing employee access time to HR info by 50%.",
-                        "Orchestrated the deployment of a scalable AWS data solution, improving system performance by 25%."
-                    ],
-                    skills: ["Java", "Spring Boot", "Spring MVC", "Spring Security", "Hibernate", "AWS", "SQL", "Alexa Skills Kit", "REST APIs"],
-                    chartData: {
-                        labels: ['Manual Entry Reduction', 'Access Time Improvement', 'Performance Improvement'],
-                        values: [30, 50, 25]
-                    }
-                },
-                {
-                    title: "Software Engineer Intern",
-                    company: "Axisray",
-                    location: "Ahmedabad, India",
-                    date: "Jun 2023 – Jul 2023",
-                    description: [
-                        "Constructed and trained a real-time fire detection system using YOLOv5 and OpenCV, achieving 95% accuracy.",
-                        "Collaborated with safety teams to integrate the system with existing protocols, enabling earlier intervention.",
-                        "Analyzed and optimized models for high accuracy and low false-positives, strengthening system reliability."
-                    ],
-                    skills: ["Python", "YOLOv5", "OpenCV", "Pandas", "NumPy", "Matplotlib"],
-                    chartData: {
-                        labels: ['Model Accuracy', 'False Alarm Reduction'],
-                        values: [95, 40]
-                    }
-                }
-            ],
-            projects: [
-                {
-                    title: "Student Portfolio Management System",
-                    description: "Architected a full-stack, LinkedIn-style networking platform for students to showcase portfolios, build connections, and collaborate.",
-                    skills: ["Java", "Spring Boot", "React", "Redux", "Material UI", "MySQL", "REST APIs", "JavaScript", "HTML/CSS"]
-                },
-                {
-                    title: "NOAH: A Statically Typed Programming Language",
-                    description: "Conceptualized and constructed a new statically typed language from the ground up, focusing on high-performance code generation.",
-                    skills: ["Java", "ANTLR", "LLVM", "CMake", "C/C++"]
-                },
-                {
-                    title: "Online Food Ordering System",
-                    description: "Delivered a full-stack e-commerce platform for a local restaurant, enabling online ordering, secure payments, and an admin dashboard.",
-                    skills: ["Java", "Spring Boot", "React", "Redux", "Bootstrap", "MySQL", "Stripe API", "JavaScript", "HTML/CSS"]
-                }
-            ],
-            education: [
-                {
-                    degree: "Master of Science in Software Engineering",
-                    university: "Arizona State University, Tempe, AZ",
-                    date: "Expected May 2026",
-                    gpa: "3.61/4.0"
-                },
-                {
-                    degree: "Bachelor of Engineering in Computer Engineering",
-                    university: "Gujarat Technological University, India",
-                    date: "May 2024",
-                    gpa: "3.39/4.0"
-                }
-            ]
-        };
+      <!-- Socket Chat -->
+      <div class="project-card featured reveal">
+        <div class="project-featured-badge">★ Featured</div>
+        <div class="project-num">01</div>
+        <div class="project-name">Socket.IO Advanced Chat</div>
+        <div class="project-desc">Production-ready real-time chat implementing exactly-once message delivery, connection state recovery, SQLite persistence, and horizontal scaling via Node.js cluster + @socket.io/cluster-adapter across all CPU cores.</div>
+        <div class="project-impact">↑ Horizontally scaled across CPU cores · Zero message duplication</div>
+        <div class="project-stack">
+          <span class="tag">Node.js</span><span class="tag">Socket.IO</span><span class="tag">SQLite</span><span class="tag">Express</span><span class="tag">Cluster API</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/OmChauhan9/Socket-chat" target="_blank" class="project-link">↗ GitHub</a>
+        </div>
+      </div>
 
-        const skillsContainer = document.getElementById('skills-container');
-        for (const [category, skills] of Object.entries(resumeData.skills)) {
-            const categoryDiv = document.createElement('div');
-            categoryDiv.innerHTML = `<h3 class="text-2xl font-semibold text-stone-800 mb-4">${category}</h3>`;
-            const tagsDiv = document.createElement('div');
-            tagsDiv.className = 'flex flex-wrap gap-3';
-            skills.forEach(skill => {
-                const tag = document.createElement('button');
-                tag.className = 'skill-tag bg-stone-200 text-stone-700 px-4 py-2 rounded-full hover:bg-teal-500 hover:text-white';
-                tag.textContent = skill;
-                tag.dataset.skill = skill;
-                tagsDiv.appendChild(tag);
-            });
-            categoryDiv.appendChild(tagsDiv);
-            skillsContainer.appendChild(categoryDiv);
-        }
+      <!-- NOAH Compiler -->
+      <div class="project-card featured reveal">
+        <div class="project-featured-badge">★ Featured</div>
+        <div class="project-num">02</div>
+        <div class="project-name">NOAH: Statically Typed Language</div>
+        <div class="project-desc">Designed and built a statically typed programming language from scratch — including a custom compiler pipeline covering lexical analysis, parsing, and semantic analysis that generates platform-independent optimized instructions.</div>
+        <div class="project-impact">↑ Full compiler pipeline · Cross-platform code generation</div>
+        <div class="project-stack">
+          <span class="tag">Java</span><span class="tag">ANTLR</span><span class="tag">LLVM</span><span class="tag">CMake</span><span class="tag">Compilers</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/OmChauhan9" target="_blank" class="project-link">↗ GitHub</a>
+        </div>
+      </div>
 
-        const experienceContainer = document.getElementById('experience-container');
-        resumeData.experience.forEach((exp, index) => {
-            const expDiv = document.createElement('div');
-            expDiv.className = 'experience-card mb-12 pl-12 relative transition-opacity duration-300';
-            expDiv.dataset.skills = JSON.stringify(exp.skills);
-            expDiv.innerHTML = `
-                <div class="absolute -left-[1.8rem] top-1.5 w-6 h-6 bg-teal-600 rounded-full border-4 border-stone-50"></div>
-                <h3 class="text-2xl font-bold text-stone-800">${exp.title}</h3>
-                <p class="text-lg font-semibold text-teal-700">${exp.company} | ${exp.location}</p>
-                <p class="text-md text-stone-500 mb-4">${exp.date}</p>
-                <ul class="list-disc list-inside space-y-2 text-stone-600">
-                    ${exp.description.map(d => `<li>${d}</li>`).join('')}
-                </ul>
-                <div class="mt-4">
-                    <h4 class="font-semibold mb-2">Key Achievements:</h4>
-                    <div class="chart-container">
-                        <canvas id="chart-${index}"></canvas>
-                    </div>
-                </div>
-            `;
-            experienceContainer.appendChild(expDiv);
-            renderChart(`chart-${index}`, exp.chartData.labels, exp.chartData.values);
-        });
+      <!-- DevOps Pipeline -->
+      <div class="project-card reveal">
+        <div class="project-num">03</div>
+        <div class="project-name">AWS CI/CD DevOps Pipeline</div>
+        <div class="project-desc">Full end-to-end automated software supply chain for a Java web app using AWS CodePipeline, CodeBuild, CodeDeploy, CodeArtifact, and CloudFormation IaC. A single git push triggers build, test, and production deployment automatically.</div>
+        <div class="project-impact">↑ Zero-touch deployment from git push to production</div>
+        <div class="project-stack">
+          <span class="tag">AWS</span><span class="tag">CodePipeline</span><span class="tag">CodeDeploy</span><span class="tag">CloudFormation</span><span class="tag">Maven</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/OmChauhan9" target="_blank" class="project-link">↗ GitHub</a>
+        </div>
+      </div>
 
-        const projectsContainer = document.getElementById('projects-container');
-        resumeData.projects.forEach((proj, index) => {
-            const projDiv = document.createElement('div');
-            projDiv.className = 'project-card bg-white p-6 rounded-lg shadow-md transition hover:shadow-xl hover:-translate-y-1 transition-opacity duration-300 flex flex-col';
-            projDiv.dataset.skills = JSON.stringify(proj.skills);
-            projDiv.innerHTML = `
-                <div class="flex-grow">
-                    <h3 class="text-xl font-bold text-stone-800 mb-2">${proj.title}</h3>
-                    <p class="text-stone-600 mb-4">${proj.description}</p>
-                    <div class="flex flex-wrap gap-2">
-                        ${proj.skills.map(s => `<span class="bg-stone-200 text-stone-700 text-xs font-semibold px-2.5 py-1 rounded-full">${s}</span>`).join('')}
-                    </div>
-                </div>
-                <button class="ai-analyze-btn mt-4 bg-teal-50 text-teal-700 px-4 py-2 rounded-lg hover:bg-teal-100 transition w-full font-semibold" data-project-index="${index}">
-                    ✨ Analyze Project
-                </button>
-            `;
-            projectsContainer.appendChild(projDiv);
-        });
-        
-        const educationContainer = document.getElementById('education-container');
-        resumeData.education.forEach(edu => {
-            const eduDiv = document.createElement('div');
-            eduDiv.className = 'bg-white p-6 rounded-lg shadow-md';
-            eduDiv.innerHTML = `
-                <h3 class="text-xl font-bold text-stone-800">${edu.degree}</h3>
-                <p class="text-lg font-semibold text-teal-700">${edu.university}</p>
-                <p class="text-md text-stone-500 mb-2">${edu.date}</p>
-                <p class="text-md text-stone-600">GPA: ${edu.gpa}</p>
-            `;
-            educationContainer.appendChild(eduDiv);
-        });
+      <!-- Hybrid Cloud Edge AI -->
+      <div class="project-card reveal">
+        <div class="project-num">04</div>
+        <div class="project-name">Hybrid Cloud & Edge AI System</div>
+        <div class="project-desc">Custom autoscaling controller for a 15-instance EC2 fleet with serverless Lambda backend. Edge computing pipeline via AWS IoT Greengrass and MQTT offloads MTCNN processing before cloud sync — achieving &lt;1.5s latency and 100% model accuracy.</div>
+        <div class="project-impact">↑ &lt;1.2s latency · 100% accuracy · 15-node autoscaling</div>
+        <div class="project-stack">
+          <span class="tag">AWS EC2</span><span class="tag">Lambda</span><span class="tag">IoT Greengrass</span><span class="tag">PyTorch</span><span class="tag">Docker</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/OmChauhan9" target="_blank" class="project-link">↗ GitHub</a>
+        </div>
+      </div>
 
-        const skillTags = document.querySelectorAll('.skill-tag');
-        const projectCards = document.querySelectorAll('.project-card');
-        const experienceCards = document.querySelectorAll('.experience-card');
+      <!-- E-Commerce Microservices -->
+      <div class="project-card reveal">
+        <div class="project-num">05</div>
+        <div class="project-name">Cloud-Native E-Commerce Platform</div>
+        <div class="project-desc">Distributed e-commerce platform with a microservices architecture deployed on Kubernetes. Jenkins + Docker CI/CD pipeline fully automated testing and deployment, achieving a 70% reduction in deployment time with resilient, highly available infrastructure on AWS.</div>
+        <div class="project-impact">↑ 70% faster deployments · Kubernetes-managed resilience</div>
+        <div class="project-stack">
+          <span class="tag">Kubernetes</span><span class="tag">Docker</span><span class="tag">Jenkins</span><span class="tag">AWS</span><span class="tag">Microservices</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/OmChauhan9" target="_blank" class="project-link">↗ GitHub</a>
+        </div>
+      </div>
 
-        skillTags.forEach(tag => {
-            tag.addEventListener('click', () => {
-                tag.classList.toggle('active');
-                const activeSkills = Array.from(document.querySelectorAll('.skill-tag.active')).map(t => t.dataset.skill);
+      <!-- StratusVault -->
+      <div class="project-card reveal">
+        <div class="project-num">06</div>
+        <div class="project-name">StratusVault: Secure Cloud File Share</div>
+        <div class="project-desc">Highly available document sharing platform on GCP — containerized Spring Boot backend running on Cloud Run with Cloud SQL and GCS. Fine-grained ACL system using Firebase Authentication enables owner-controlled read-only document sharing.</div>
+        <div class="project-impact">↑ Serverless autoscaling · Fine-grained ACL access control</div>
+        <div class="project-stack">
+          <span class="tag">Java</span><span class="tag">Spring Boot</span><span class="tag">GCP</span><span class="tag">Cloud Run</span><span class="tag">Firebase</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/OmChauhan9" target="_blank" class="project-link">↗ GitHub</a>
+        </div>
+      </div>
 
-                const filterAndHighlight = (card) => {
-                    const cardSkills = JSON.parse(card.dataset.skills);
-                    const hasActiveSkill = activeSkills.length === 0 || activeSkills.some(s => cardSkills.includes(s));
+      <!-- Student Portfolio -->
+      <div class="project-card reveal">
+        <div class="project-num">07</div>
+        <div class="project-name">Student Portfolio Network</div>
+        <div class="project-desc">Full-stack LinkedIn-style networking platform for students to showcase portfolios and collaborate. Engineered a secure WebSocket architecture delivering &lt;80ms latency for real-time chat and notifications with robust cross-device authentication.</div>
+        <div class="project-impact">↑ &lt;80ms WebSocket latency · Full auth system</div>
+        <div class="project-stack">
+          <span class="tag">Java</span><span class="tag">Spring Boot</span><span class="tag">React</span><span class="tag">Redux</span><span class="tag">MySQL</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/OmChauhan9" target="_blank" class="project-link">↗ GitHub</a>
+        </div>
+      </div>
 
-                    if (hasActiveSkill) {
-                        card.classList.remove('opacity-20');
-                        card.classList.remove('highlight');
-                         if (activeSkills.length > 0) {
-                            card.classList.add('highlight');
-                         }
-                    } else {
-                        card.classList.add('opacity-20');
-                        card.classList.remove('highlight');
-                    }
-                };
-                projectCards.forEach(filterAndHighlight);
-                experienceCards.forEach(filterAndHighlight);
-            });
-        });
+      <!-- Food Ordering -->
+      <div class="project-card reveal">
+        <div class="project-num">08</div>
+        <div class="project-name">Online Food Ordering System</div>
+        <div class="project-desc">Full-stack e-commerce platform for a restaurant enabling online ordering, Stripe payment processing, and automated receipts. Admin dashboard improved order management efficiency by 20% through streamlined inventory and payment tracking.</div>
+        <div class="project-impact">↑ 20% faster order management · Stripe payments</div>
+        <div class="project-stack">
+          <span class="tag">Java</span><span class="tag">Spring Boot</span><span class="tag">React</span><span class="tag">Stripe API</span><span class="tag">MySQL</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/OmChauhan9" target="_blank" class="project-link">↗ GitHub</a>
+        </div>
+      </div>
 
-        const modal = document.getElementById('ai-modal');
-        const closeModalBtn = document.getElementById('close-modal-btn');
-        const modalTitle = document.getElementById('modal-title');
-        const modalBody = document.getElementById('modal-body');
-        const modalSpinner = document.getElementById('modal-spinner');
+    </div>
+  </div>
+</section>
 
-        document.querySelectorAll('.ai-analyze-btn').forEach(button => {
-            button.addEventListener('click', async () => {
-                const projectIndex = button.dataset.projectIndex;
-                const project = resumeData.projects[projectIndex];
-                
-                modalTitle.textContent = `AI Analysis: ${project.title}`;
-                modalBody.innerHTML = '';
-                modalSpinner.style.display = 'block';
-                modal.classList.remove('hidden');
-                setTimeout(() => modal.classList.remove('opacity-0'), 10);
-                
-                const prompt = `As a technical recruiter analyzing a candidate's portfolio, provide a brief analysis of the following project. Focus on the potential technical challenges, the business impact, and the key skills demonstrated. Present the analysis in three short, clear paragraphs with headers (Technical Challenges, Business Impact, Key Learnings). Project Title: "${project.title}". Description: "${project.description}". Skills Used: ${project.skills.join(', ')}.`;
-                
-                try {
-                    const analysis = await callGeminiAPI(prompt);
-                    modalBody.innerHTML = analysis.replace(/\n/g, '<br>');
-                } catch (error) {
-                    modalBody.textContent = 'Sorry, the AI analysis could not be completed at this time.';
-                } finally {
-                    modalSpinner.style.display = 'none';
-                }
-            });
-        });
+<!-- SKILLS -->
+<section id="skills">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="section-tag">Skills</div>
+      <h2 class="section-title">Technical stack</h2>
+      <p class="section-desc">Tools and technologies I use to ship production-grade software.</p>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-group reveal">
+        <div class="skill-group-title">Languages</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Java</span>
+          <span class="skill-tag">Python</span>
+          <span class="skill-tag">JavaScript</span>
+          <span class="skill-tag">TypeScript</span>
+          <span class="skill-tag">C/C++</span>
+          <span class="skill-tag">SQL</span>
+        </div>
+      </div>
+      <div class="skill-group reveal">
+        <div class="skill-group-title">Backend Frameworks</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Spring Boot</span>
+          <span class="skill-tag">Node.js</span>
+          <span class="skill-tag">Express</span>
+          <span class="skill-tag">Socket.IO</span>
+          <span class="skill-tag">Django</span>
+          <span class="skill-tag">Flask</span>
+        </div>
+      </div>
+      <div class="skill-group reveal">
+        <div class="skill-group-title">Cloud & DevOps</div>
+        <div class="skill-tags">
+          <span class="skill-tag">AWS (EC2, Lambda, S3, RDS)</span>
+          <span class="skill-tag">GCP</span>
+          <span class="skill-tag">Docker</span>
+          <span class="skill-tag">Kubernetes</span>
+          <span class="skill-tag">CI/CD</span>
+          <span class="skill-tag">Jenkins</span>
+        </div>
+      </div>
+      <div class="skill-group reveal">
+        <div class="skill-group-title">Frontend</div>
+        <div class="skill-tags">
+          <span class="skill-tag">React</span>
+          <span class="skill-tag">Redux</span>
+          <span class="skill-tag">React Native</span>
+          <span class="skill-tag">Material UI</span>
+          <span class="skill-tag">HTML/CSS</span>
+        </div>
+      </div>
+      <div class="skill-group reveal">
+        <div class="skill-group-title">Databases</div>
+        <div class="skill-tags">
+          <span class="skill-tag">MySQL</span>
+          <span class="skill-tag">PostgreSQL</span>
+          <span class="skill-tag">MongoDB</span>
+          <span class="skill-tag">Redis</span>
+          <span class="skill-tag">SQLite</span>
+          <span class="skill-tag">DynamoDB</span>
+        </div>
+      </div>
+      <div class="skill-group reveal">
+        <div class="skill-group-title">Specialized</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Spring Security</span>
+          <span class="skill-tag">Hibernate</span>
+          <span class="skill-tag">Uber H3</span>
+          <span class="skill-tag">ANTLR / LLVM</span>
+          <span class="skill-tag">YOLOv5 / OpenCV</span>
+          <span class="skill-tag">PyTorch</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-        closeModalBtn.addEventListener('click', () => {
-            modal.classList.add('opacity-0');
-            setTimeout(() => modal.classList.add('hidden'), 300);
-        });
+<!-- EDUCATION -->
+<section id="education">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="section-tag">Education</div>
+      <h2 class="section-title">Academic background</h2>
+    </div>
+    <div class="edu-grid" style="margin-top: 3.5rem;">
+      <div class="edu-card reveal">
+        <div>
+          <div class="edu-school">Arizona State University</div>
+          <div class="edu-degree">Master of Science in Software Engineering · Expected May 2026 · Tempe, AZ</div>
+        </div>
+        <div class="edu-gpa">GPA 3.78 / 4.0</div>
+      </div>
+      <div class="edu-card reveal">
+        <div>
+          <div class="edu-school">Gujarat Technological University</div>
+          <div class="edu-degree">Bachelor of Engineering in Computer Engineering · Aug 2020 – May 2024 · India</div>
+        </div>
+        <div class="edu-gpa">GPA 3.39 / 4.0</div>
+      </div>
+    </div>
+  </div>
+</section>
 
-        const careerAdvisorBtn = document.getElementById('career-advisor-btn');
-        const careerAdvisorResult = document.getElementById('career-advisor-result');
-        const careerSpinner = document.getElementById('career-spinner');
-        const careerContent = document.getElementById('career-content');
+<!-- ABOUT -->
+<section id="about">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="section-tag">About</div>
+      <h2 class="section-title">The engineer behind the work</h2>
+    </div>
+    <div class="about-layout">
+      <div class="about-text reveal">
+        <p>I'm a software engineer who genuinely cares about <strong>how systems are built</strong> — not just whether they work. I gravitate toward the hard problems: designing for scale before you need it, eliminating bottlenecks others ignore, and making architectural decisions that hold up under pressure.</p>
+        <p>My background spans backend infrastructure, cloud-native systems, real-time applications, and even language design. I've built fire detection AI, compiled a programming language from scratch, and deployed distributed microservices — across both India and the US.</p>
+        <p>Currently completing my <strong>MS in Software Engineering at ASU</strong> (GPA 3.78), where I continue building systems that go well beyond proof-of-concept. If it needs to scale, I'm interested.</p>
+      </div>
+      <div class="about-highlights reveal">
+        <div class="highlight-card">
+          <div class="highlight-icon">⚙</div>
+          <div>
+            <div class="highlight-title">Systems-first thinking</div>
+            <div class="highlight-body">I design for scale from day one — Redis over MongoDB for live tracking, horizontal Socket.IO clustering, proper autoscaling on AWS.</div>
+          </div>
+        </div>
+        <div class="highlight-card">
+          <div class="highlight-icon">☁</div>
+          <div>
+            <div class="highlight-title">Cloud-native by default</div>
+            <div class="highlight-body">Experience across AWS and GCP — from serverless Lambda to Kubernetes clusters and IaC with CloudFormation.</div>
+          </div>
+        </div>
+        <div class="highlight-card">
+          <div class="highlight-icon">📐</div>
+          <div>
+            <div class="highlight-title">Compiler-level depth</div>
+            <div class="highlight-body">Built NOAH: a statically typed language with a custom ANTLR/LLVM compiler pipeline — from lexing to platform-independent code generation.</div>
+          </div>
+        </div>
+        <div class="highlight-card">
+          <div class="highlight-icon">📊</div>
+          <div>
+            <div class="highlight-title">Measurable impact</div>
+            <div class="highlight-body">30% less manual data entry. 60% faster emergency response. 70% reduced deployment time. Engineering decisions backed by numbers.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-        careerAdvisorBtn.addEventListener('click', async () => {
-            careerAdvisorResult.style.display = 'block';
-            careerContent.innerHTML = '';
-            careerSpinner.style.display = 'block';
-            careerAdvisorBtn.disabled = true;
+<!-- CONTACT -->
+<section id="contact">
+  <div class="wrap">
+    <div class="contact-inner reveal">
+      <h2 class="contact-title">Let's build something<br><span>worth remembering</span></h2>
+      <p class="contact-desc">Open to full-time software engineering roles, research collaborations, and interesting problems. Let's talk.</p>
+      <div style="margin-bottom: 2rem;">
+        <a href="mailto:omrajesh9203@gmail.com" class="contact-email">omrajesh9203@gmail.com</a>
+      </div>
+      <div class="contact-links">
+        <a href="mailto:omrajesh9203@gmail.com" class="contact-link">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          Email
+        </a>
+        <a href="https://www.linkedin.com/in/om-chauhan-9a567623b/" target="_blank" class="contact-link">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+          LinkedIn
+        </a>
+        <a href="https://github.com/OmChauhan9" target="_blank" class="contact-link">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+          GitHub
+        </a>
+        <a href="tel:6028072203" class="contact-link">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.6a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 3h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 10.6a16 16 0 0 0 6 6l.94-.94a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          (602) 807-2203
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
 
-            const profileSummary = `
-                A software engineer with a Master's in Software Engineering and experience in the following areas:
-                - Skills: ${Object.values(resumeData.skills).flat().join(', ')}
-                - Experience: ${resumeData.experience.map(e => `${e.title} where they ${e.description.join(' ')}`).join('. ')}
-                - Projects: ${resumeData.projects.map(p => `${p.title}: ${p.description}`).join('. ')}
-            `;
-            const prompt = `Acting as a FAANG technical recruiter and career advisor, analyze this software engineer's profile. Based on their skills in Java, Spring Boot, React, Python, and AWS, and their project work, suggest 3-5 concrete and distinct career path specializations they could pursue next. For each suggestion, provide a one-sentence rationale explaining why it's a good fit. Format the output as a list. Profile: ${profileSummary}`;
-            
-            try {
-                const advice = await callGeminiAPI(prompt);
-                careerContent.innerHTML = advice.replace(/\n/g, '<br>');
-            } catch (error) {
-                careerContent.textContent = 'Sorry, career advice could not be generated at this time.';
-            } finally {
-                careerSpinner.style.display = 'none';
-                careerAdvisorBtn.disabled = false;
-            }
-        });
+<!-- FOOTER -->
+<footer>
+  <p class="footer-text">© 2025 Om Chauhan · Built with care · Tempe, AZ</p>
+</footer>
 
-        async function callGeminiAPI(promptText) {
-            const apiKey = "";
-            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
-            
-            const payload = {
-                contents: [{
-                    role: "user",
-                    parts: [{ text: promptText }]
-                }]
-            };
+<script>
+  // Cursor
+  const cursor = document.getElementById('cursor');
+  document.addEventListener('mousemove', e => {
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top = e.clientY + 'px';
+  });
+  document.querySelectorAll('a, button').forEach(el => {
+    el.addEventListener('mouseenter', () => { cursor.style.width = '14px'; cursor.style.height = '14px'; cursor.style.opacity = '0.5'; });
+    el.addEventListener('mouseleave', () => { cursor.style.width = '6px'; cursor.style.height = '6px'; cursor.style.opacity = '1'; });
+  });
 
-            const response = await fetch(apiUrl, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(payload)
-            });
-
-            if (!response.ok) {
-                throw new Error(`API call failed with status: ${response.status}`);
-            }
-
-            const result = await response.json();
-            
-            if (result.candidates && result.candidates.length > 0 && result.candidates[0].content.parts.length > 0) {
-                return result.candidates[0].content.parts[0].text;
-            } else {
-                throw new Error('Invalid response structure from API.');
-            }
-        }
-        
-        function renderChart(canvasId, labels, data) {
-            const ctx = document.getElementById(canvasId).getContext('2d');
-            new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: labels,
-                    datasets: [{
-                        label: 'Improvement (%)',
-                        data: data,
-                        backgroundColor: 'rgba(20, 184, 166, 0.6)',
-                        borderColor: 'rgba(13, 148, 136, 1)',
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    indexAxis: 'y',
-                    plugins: {
-                        legend: {
-                            display: false
-                        },
-                        tooltip: {
-                            callbacks: {
-                                label: function(context) {
-                                    return `${context.dataset.label}: ${context.raw}%`;
-                                }
-                            }
-                        }
-                    },
-                    scales: {
-                        x: {
-                            beginAtZero: true,
-                            max: 100,
-                             ticks: {
-                                callback: function(value) {
-                                    return value + '%';
-                                }
-                            }
-                        }
-                    }
-                }
-            });
-        }
+  // Scroll reveal
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        e.target.style.transitionDelay = (i * 0.05) + 's';
+        e.target.classList.add('visible');
+      }
     });
-    </script>
+  }, { threshold: 0.08 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Nav scroll effect
+  window.addEventListener('scroll', () => {
+    const nav = document.querySelector('nav');
+    if (window.scrollY > 50) {
+      nav.style.background = 'rgba(12,12,15,0.92)';
+    } else {
+      nav.style.background = 'rgba(12,12,15,0.7)';
+    }
+  });
+</script>
 </body>
 </html>
