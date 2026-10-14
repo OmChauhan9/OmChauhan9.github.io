@@ -565,7 +565,7 @@
     background-size: 24px 24px;
     border: 2px dashed var(--paper-border-dark);
     border-radius: 24px;
-    min-height: 440px;
+    min-height: 480px;
     position: relative;
     overflow: hidden;
     box-shadow: 0 4px 20px rgba(45, 38, 30, 0.05) inset;
@@ -634,6 +634,13 @@
     border: 1px solid var(--paper-border);
     width: 270px;
     color: var(--ink-dark);
+  }
+
+  .drag-note-blue {
+    background: #EFF6FF;
+    border: 1px solid #BFDBFE;
+    width: 260px;
+    color: #1E3A8A;
   }
 
   .drag-badge {
@@ -1471,7 +1478,7 @@
         </h1>
         
         <p class="hero-bio">
-          I'm a backend, systems, and cloud software engineer completing my M.S. in Software Engineering at <strong>Arizona State University</strong>. I engineer deterministic C++ matching engines, distributed microservices in Java Spring Boot & Node.js, and autonomous multi-agent pipelines with LangGraph.
+          I'm a backend, systems, and cloud software engineer completing my M.S. in Software Engineering at <strong>Arizona State University</strong>. I engineer low-latency C++ matching engines, distributed primitives in Java 21 (LSM trees, timing wheels, consistent hashing), resilient cloud infrastructure on AWS & GCP, and asynchronous streaming AI gateways.
         </p>
 
         <div class="hero-actions">
@@ -1517,7 +1524,7 @@
             <div class="stat-lbl">C++ Events Throughput</div>
           </div>
           <div class="stat-box">
-            <div class="stat-val">10<small>+</small></div>
+            <div class="stat-val">16<small>+</small></div>
             <div class="stat-lbl">Engineered Systems</div>
           </div>
           <div class="stat-box">
@@ -1527,7 +1534,7 @@
         </div>
 
         <div class="hero-card-footer">
-          <span>Focus: C++, Java, Cloud & Distributed AI</span>
+          <span>Focus: Java 21, C++, Cloud & Distributed AI</span>
           <span>⚡ MST Active</span>
         </div>
       </div>
@@ -1554,48 +1561,70 @@
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </div>
 
-      <!-- Draggable Sticky Item 1 -->
-      <div class="drag-item drag-note-yellow" style="top: 45px; left: 40px; transform: rotate(-3deg);">
+      <!-- Draggable Note 1: Distributed Task Scheduler -->
+      <div class="drag-item drag-note-yellow" style="top: 25px; left: 25px; transform: rotate(-3deg);">
         <div class="drag-pin"></div>
-        <h4>C++20 Matching Engine</h4>
-        <p>1.2M events/sec with sub-15µs p99 latency & deterministic order book replay.</p>
-        <span class="tag-code">C++20 · GoogleTest · O(1) cancel</span>
+        <h4>Distributed Task Scheduler</h4>
+        <p>Hashed Timing Wheel with O(1) task dispatching, SQS-style visibility leases, fencing tokens & DLQ.</p>
+        <span class="tag-code">Java 21 · Timing Wheel · Distributed Queue</span>
       </div>
 
-      <!-- Draggable Sticky Item 2 -->
-      <div class="drag-item drag-note-pink" style="top: 190px; left: 160px; transform: rotate(4deg);">
-        <div class="drag-pin" style="background: #E11D48;"></div>
-        <h4>StratusVault</h4>
-        <p>Zero-trust file sharing using Spring Boot, Firebase Auth, and Google Cloud Storage buckets.</p>
-        <span class="tag-code">GCP · Spring Boot · PostgreSQL</span>
-      </div>
-
-      <!-- Draggable Sticky Item 3 -->
-      <div class="drag-item drag-note-green" style="top: 60px; left: 450px; transform: rotate(-2deg);">
+      <!-- Draggable Note 2: LSM Storage Engine -->
+      <div class="drag-item drag-note-green" style="top: 245px; left: 35px; transform: rotate(2deg);">
         <div class="drag-pin" style="background: #059669;"></div>
-        <h4>LangGraph Agent Swarm</h4>
-        <p>Supervised multi-agent architecture decomposing financial metrics, DuckDB queries & SEC filings.</p>
-        <span class="tag-code">Python · LangGraph · FAISS · RAG</span>
+        <h4>LSM Storage Engine</h4>
+        <p>Storage primitive with concurrent MemTable, binary append-only WAL, SSTables, Bloom filters & compaction.</p>
+        <span class="tag-code">Java 21 · LSM-Tree · Bloom Filter · Sparse Index</span>
       </div>
 
-      <!-- Draggable Stamp Item 4 -->
-      <div class="drag-item drag-note-white" style="top: 200px; left: 520px; transform: rotate(3deg);">
+      <!-- Draggable Note 3: C++20 Matching Engine -->
+      <div class="drag-item drag-note-blue" style="top: 35px; left: 310px; transform: rotate(3deg);">
         <div class="drag-pin" style="background: #2563EB;"></div>
-        <h4>High-Throughput Parser</h4>
-        <p>Normalized 6M+ binary exchange records/sec using cache-line-separated SPSC ring buffers.</p>
-        <span class="tag-code">24.0M msgs/sec pipeline</span>
+        <h4>C++20 Matching Engine</h4>
+        <p>1.2M events/sec with sub-15µs p99 latency, deterministic replay & strict price-time priority.</p>
+        <span class="tag-code">C++20 · GoogleTest · O(1) cancel lookup</span>
       </div>
 
-      <!-- Draggable Badge 5 -->
-      <div class="drag-item drag-badge" style="top: 110px; left: 810px; transform: rotate(6deg);">
+      <!-- Draggable Note 4: Consistent Hashing Ring -->
+      <div class="drag-item drag-note-pink" style="top: 255px; left: 330px; transform: rotate(-4deg);">
+        <div class="drag-pin" style="background: #E11D48;"></div>
+        <h4>Consistent Hashing Ring</h4>
+        <p>Distributed key-value router with virtual nodes (vnodes), MurmurHash3, vector clocks & tunable quorum.</p>
+        <span class="tag-code">Dynamo Ring · vnodes · Tunable Quorum</span>
+      </div>
+
+      <!-- Draggable Note 5: Async AI Gateway -->
+      <div class="drag-item drag-note-white" style="top: 30px; left: 600px; transform: rotate(-2deg);">
+        <div class="drag-pin" style="background: #7E22CE;"></div>
+        <h4>Streaming AI Gateway</h4>
+        <p>Async FastAPI proxy with non-blocking SSE streaming, TTFT/TPOT telemetry profiling & circuit breaker.</p>
+        <span class="tag-code">Python · AsyncIO · SSE · Leaky Bucket</span>
+      </div>
+
+      <!-- Draggable Note 6: NanoKafka Commit Log -->
+      <div class="drag-item drag-note-yellow" style="top: 250px; left: 620px; transform: rotate(3deg);">
+        <div class="drag-pin"></div>
+        <h4>NanoKafka Streaming Log</h4>
+        <p>Append-only commit log engine with segment rollover, O(1) binary seeks & ZooKeeper coordination.</p>
+        <span class="tag-code">Java · Commit Log · ZooKeeper Coordination</span>
+      </div>
+
+      <!-- Draggable Badge 7 -->
+      <div class="drag-item drag-badge" style="top: 45px; left: 890px; transform: rotate(5deg);">
         <span>🎓</span>
         <span>MS Software Engineering '26</span>
       </div>
 
-      <!-- Draggable Badge 6 -->
-      <div class="drag-item drag-badge" style="top: 240px; left: 820px; background: #0F766E; transform: rotate(-5deg);">
+      <!-- Draggable Badge 8 -->
+      <div class="drag-item drag-badge" style="top: 155px; left: 880px; background: #0F766E; transform: rotate(-4deg);">
         <span>☁️</span>
-        <span>AWS & GCP Infrastructure</span>
+        <span>AWS & GCP Architecture</span>
+      </div>
+
+      <!-- Draggable Badge 9 -->
+      <div class="drag-item drag-badge" style="top: 265px; left: 900px; background: #7E22CE; transform: rotate(3deg);">
+        <span>⚡</span>
+        <span>16+ Production Systems</span>
       </div>
     </div>
   </div>
@@ -1609,25 +1638,112 @@
         <div class="section-eyebrow">Production & Systems Archive</div>
         <h2 class="section-heading-scrap">Things I've Engineered</h2>
         <p style="color: var(--ink-muted); margin-top: 0.35rem; font-size: 1.05rem;">
-          Proof of low-latency systems, distributed architectures, cloud automation, and language interpreters.
+          Low-latency matching engines, Java 21 distributed primitives, streaming AI proxies, and cloud infrastructure.
         </p>
       </div>
 
       <!-- Interactive filter tabs -->
       <div class="filter-pills" id="project-filters">
-        <button class="filter-btn active" data-filter="all">All (12)</button>
-        <button class="filter-btn" data-filter="systems">⚡ Systems & C++</button>
-        <button class="filter-btn" data-filter="cloud">☁️ Cloud & Backend</button>
-        <button class="filter-btn" data-filter="ai">🤖 AI & Agents</button>
+        <button class="filter-btn active" data-filter="all">All (16)</button>
+        <button class="filter-btn" data-filter="systems">⚡ Distributed Systems & C++ (7)</button>
+        <button class="filter-btn" data-filter="cloud">☁️ Cloud & Backend (6)</button>
+        <button class="filter-btn" data-filter="ai">🤖 AI & Agents (3)</button>
       </div>
     </div>
 
     <div class="projects-grid" id="projects-container">
       
-      <!-- Project 01 -->
+      <!-- Project 01: Distributed Task Scheduler -->
       <div class="ticket-card featured-card" data-category="systems">
         <div class="ticket-card-header">
           <span class="ticket-num">PROJ // 01</span>
+          <span class="ticket-badge badge-p0">★ FAULT-TOLERANT</span>
+        </div>
+        <h3 class="ticket-title">Distributed Task Scheduler & Worker Queue</h3>
+        <p class="ticket-desc">
+          Distributed, fault-tolerant asynchronous task scheduler & worker queue built in Java 21. Features a Hashed Timing Wheel for O(1) task dispatching, SQS-style visibility timeout leasing for distributed workers, fencing tokens to eliminate split-brain writes, idempotency deduplication keys, and automated dead-letter queue (DLQ) quarantine.
+        </p>
+        <div class="ticket-metric">
+          ⏱️ O(1) Hashed Timing Wheel · Visibility timeout leases · Fencing tokens · Dead-letter queue
+        </div>
+        <div class="ticket-tags">
+          <span class="tech-chip">Java 21</span>
+          <span class="tech-chip">Timing Wheel</span>
+          <span class="tech-chip">Distributed Queue</span>
+          <span class="tech-chip">Concurrency</span>
+          <span class="tech-chip">Virtual Threads</span>
+        </div>
+        <div class="ticket-footer">
+          <a href="https://github.com/OmChauhan9/distributed-task-scheduler" target="_blank" rel="noopener noreferrer" class="project-btn-link">
+            <span>View on GitHub</span>
+            <span>↗</span>
+          </a>
+          <span class="hand" style="font-size: 1.15rem;">Zero Split-Brain</span>
+        </div>
+      </div>
+
+      <!-- Project 02: LSM Storage Engine Primitive -->
+      <div class="ticket-card featured-card" data-category="systems">
+        <div class="ticket-card-header">
+          <span class="ticket-num">PROJ // 02</span>
+          <span class="ticket-badge badge-p0">★ STORAGE PRIMITIVE</span>
+        </div>
+        <h3 class="ticket-title">LSM Storage Engine Primitive</h3>
+        <p class="ticket-desc">
+          High-performance single-node Log-Structured Merge-tree storage engine primitive in Java 21. Engineered with a concurrent SkipList MemTable, binary append-only Write-Ahead Log (WAL) with CRC32 checksums, immutable sequential SSTables, an in-memory Sparse Index for log(N) seeks, Bloom filter disk-avoidance, and tiered multi-way compaction.
+        </p>
+        <div class="ticket-metric">
+          💾 Concurrent MemTable · Binary WAL · Sparse Index · Bloom Filters · Multi-Way Compaction
+        </div>
+        <div class="ticket-tags">
+          <span class="tech-chip">Java 21</span>
+          <span class="tech-chip">LSM-Tree</span>
+          <span class="tech-chip">Storage Engine</span>
+          <span class="tech-chip">Bloom Filter</span>
+          <span class="tech-chip">Write-Ahead Log</span>
+        </div>
+        <div class="ticket-footer">
+          <a href="https://github.com/OmChauhan9/lsm-storage-engine" target="_blank" rel="noopener noreferrer" class="project-btn-link">
+            <span>View on GitHub</span>
+            <span>↗</span>
+          </a>
+          <span class="hand" style="font-size: 1.15rem;">Disk IO Minimization</span>
+        </div>
+      </div>
+
+      <!-- Project 03: Consistent Hashing Router -->
+      <div class="ticket-card featured-card" data-category="systems">
+        <div class="ticket-card-header">
+          <span class="ticket-num">PROJ // 03</span>
+          <span class="ticket-badge badge-p0">★ RING TOPOLOGY</span>
+        </div>
+        <h3 class="ticket-title">Consistent Hashing Router & Replication Ring</h3>
+        <p class="ticket-desc">
+          Distributed key-value router and partition coordinator inspired by Amazon Dynamo and Apache Cassandra. Implements virtual nodes (vnodes) for uniform cluster load distribution, 64-bit MurmurHash3 (>3 GB/sec hashing throughput), vector clocks for causal conflict tracking, and tunable quorum replication (W + R > N).
+        </p>
+        <div class="ticket-metric">
+          🔄 Virtual Nodes (vnodes) · MurmurHash3 · Tunable Quorum (W+R > N) · Vector Clocks
+        </div>
+        <div class="ticket-tags">
+          <span class="tech-chip">Java</span>
+          <span class="tech-chip">Consistent Hashing</span>
+          <span class="tech-chip">Distributed Systems</span>
+          <span class="tech-chip">MurmurHash3</span>
+          <span class="tech-chip">Quorum</span>
+        </div>
+        <div class="ticket-footer">
+          <a href="https://github.com/OmChauhan9/consistent-hashing-router" target="_blank" rel="noopener noreferrer" class="project-btn-link">
+            <span>View on GitHub</span>
+            <span>↗</span>
+          </a>
+          <span class="hand" style="font-size: 1.15rem;">Dynamo Architecture</span>
+        </div>
+      </div>
+
+      <!-- Project 04: C++ Limit Order Book & Matching Engine -->
+      <div class="ticket-card featured-card" data-category="systems">
+        <div class="ticket-card-header">
+          <span class="ticket-num">PROJ // 04</span>
           <span class="ticket-badge badge-p0">★ LOW-LATENCY</span>
         </div>
         <h3 class="ticket-title">C++ Limit Order Book & Matching Engine</h3>
@@ -1650,10 +1766,10 @@
         </div>
       </div>
 
-      <!-- Project 02 -->
+      <!-- Project 05: C++ Market Data Parser & Event Pipeline -->
       <div class="ticket-card featured-card" data-category="systems">
         <div class="ticket-card-header">
-          <span class="ticket-num">PROJ // 02</span>
+          <span class="ticket-num">PROJ // 05</span>
           <span class="ticket-badge badge-p0">★ HIGH-THROUGHPUT</span>
         </div>
         <h3 class="ticket-title">C++ Market Data Parser & Event Pipeline</h3>
@@ -1676,178 +1792,39 @@
         </div>
       </div>
 
-      <!-- Project 03 -->
-      <div class="ticket-card featured-card" data-category="ai">
+      <!-- Project 06: NanoKafka -->
+      <div class="ticket-card" data-category="systems">
         <div class="ticket-card-header">
-          <span class="ticket-num">PROJ // 03</span>
-          <span class="ticket-badge badge-ai">★ MULTI-AGENT</span>
+          <span class="ticket-num">PROJ // 06</span>
+          <span class="ticket-badge badge-p0">★ EVENT STREAMING</span>
         </div>
-        <h3 class="ticket-title">Agentic Finance Research System</h3>
+        <h3 class="ticket-title">NanoKafka — Distributed Commit-Log Streaming</h3>
         <p class="ticket-desc">
-          LangGraph-based multi-agent workflow using a supervisor-controller pattern to decompose finance queries across news retrieval, financial statement analysis, SQL screening, analyst outlook, and sector research.
+          Educational distributed commit-log event streaming platform built in Java. Implements an append-only segment storage layer, index-based O(1) binary byte seeks, ZooKeeper broker coordination with ephemeral node watchers, partition rebalancing, and a custom binary wire protocol.
         </p>
         <div class="ticket-metric">
-          📈 yfinance · DuckDB filters · Web-search grounding · Structured reports
-        </div>
-        <div class="ticket-tags">
-          <span class="tech-chip">Python</span>
-          <span class="tech-chip">LangGraph</span>
-          <span class="tech-chip">LangChain</span>
-          <span class="tech-chip">DuckDB</span>
-          <span class="tech-chip">Agents</span>
-        </div>
-        <div class="ticket-footer">
-          <span class="private-badge">🔒 Private Codebase</span>
-          <span class="hand" style="font-size: 1.15rem;">Autonomous Workflow</span>
-        </div>
-      </div>
-
-      <!-- Project 04 -->
-      <div class="ticket-card" data-category="ai">
-        <div class="ticket-card-header">
-          <span class="ticket-num">PROJ // 04</span>
-          <span class="ticket-badge badge-ai">RAG AGENT</span>
-        </div>
-        <h3 class="ticket-title">CiteLens — Mini Deep Research Agent</h3>
-        <p class="ticket-desc">
-          LangGraph-based research agent that decomposes user questions, retrieves evidence from indexed documents, and generates citation-grounded answers using a RAG pipeline with FAISS and LangSmith evaluation.
-        </p>
-        <div class="ticket-metric">
-          🔍 Citation verifier · LangSmith tracing · Hallucination checks
-        </div>
-        <div class="ticket-tags">
-          <span class="tech-chip">Python</span>
-          <span class="tech-chip">LangGraph</span>
-          <span class="tech-chip">RAG</span>
-          <span class="tech-chip">FAISS</span>
-          <span class="tech-chip">Evaluation</span>
-        </div>
-        <div class="ticket-footer">
-          <span class="private-badge">🔒 Private Repo</span>
-          <span class="hand" style="font-size: 1.1rem;">Fact-Checked Output</span>
-        </div>
-      </div>
-
-      <!-- Project 05 -->
-      <div class="ticket-card featured-card" data-category="cloud">
-        <div class="ticket-card-header">
-          <span class="ticket-num">PROJ // 05</span>
-          <span class="ticket-badge badge-cloud">★ OPEN SOURCE</span>
-        </div>
-        <h3 class="ticket-title">StratusVault — Secure Cloud File Share</h3>
-        <p class="ticket-desc">
-          Secure cloud-native document locker built with Spring Boot, Firebase Authentication, PostgreSQL, Google Cloud Storage, and Cloud Run. Implements private file storage, server-side token verification, and file-level ACLs.
-        </p>
-        <div class="ticket-metric">
-          ☁️ Private GCS storage · Firebase auth · File-level ACLs · Cloud Run
+          📨 Append-only commit log · O(1) binary index seeks · ZooKeeper coordination · Wire protocol
         </div>
         <div class="ticket-tags">
           <span class="tech-chip">Java</span>
-          <span class="tech-chip">Spring Boot</span>
-          <span class="tech-chip">Firebase</span>
-          <span class="tech-chip">PostgreSQL</span>
-          <span class="tech-chip">GCP</span>
+          <span class="tech-chip">Commit Log</span>
+          <span class="tech-chip">Event Streaming</span>
+          <span class="tech-chip">ZooKeeper</span>
+          <span class="tech-chip">Binary Protocol</span>
         </div>
         <div class="ticket-footer">
-          <a href="https://github.com/OmChauhan9/stratusvault-secure-cloud-file-share" target="_blank" rel="noopener noreferrer" class="project-btn-link">
+          <a href="https://github.com/OmChauhan9/NanoKafka" target="_blank" rel="noopener noreferrer" class="project-btn-link">
             <span>View on GitHub</span>
             <span>↗</span>
           </a>
-          <span class="hand" style="font-size: 1.15rem;">Production Cloud</span>
+          <span class="hand" style="font-size: 1.15rem;">Zero-Offset Lag</span>
         </div>
       </div>
 
-      <!-- Project 06 -->
-      <div class="ticket-card" data-category="cloud">
-        <div class="ticket-card-header">
-          <span class="ticket-num">PROJ // 06</span>
-          <span class="ticket-badge badge-cloud">HYBRID AI / IOT</span>
-        </div>
-        <h3 class="ticket-title">Hybrid Cloud & Edge AI System</h3>
-        <p class="ticket-desc">
-          AWS edge/cloud inference system using IoT Greengrass, MQTT, SQS, Lambda, EC2, Docker, and PyTorch. Built a queue-depth autoscaling controller and edge processing pipeline that sends detected face crops instead of raw frames.
-        </p>
-        <div class="ticket-metric">
-          ⚡ 15-instance autoscaling · Edge inference · SQS-backed pipeline
-        </div>
-        <div class="ticket-tags">
-          <span class="tech-chip">AWS EC2</span>
-          <span class="tech-chip">Lambda</span>
-          <span class="tech-chip">SQS</span>
-          <span class="tech-chip">IoT Greengrass</span>
-          <span class="tech-chip">PyTorch</span>
-        </div>
-        <div class="ticket-footer">
-          <a href="https://github.com/OmChauhan9/hybrid-cloud-edge-ai-system" target="_blank" rel="noopener noreferrer" class="project-btn-link">
-            <span>View on GitHub</span>
-            <span>↗</span>
-          </a>
-          <span class="hand" style="font-size: 1.1rem;">Edge Compute</span>
-        </div>
-      </div>
-
-      <!-- Project 07 -->
-      <div class="ticket-card" data-category="cloud">
-        <div class="ticket-card-header">
-          <span class="ticket-num">PROJ // 07</span>
-          <span class="ticket-badge badge-cloud">DEVOPS CI/CD</span>
-        </div>
-        <h3 class="ticket-title">AWS CI/CD Java Deployment Pipeline</h3>
-        <p class="ticket-desc">
-          Automated AWS deployment pipeline for a Maven Java web app deployed to EC2 Tomcat. Uses CodePipeline, CodeBuild, CodeDeploy, CodeArtifact, S3 artifacts, and Bash lifecycle hooks to automate build and deploy stages.
-        </p>
-        <div class="ticket-metric">
-          🔄 GitHub push → build → artifact → EC2 deployment
-        </div>
-        <div class="ticket-tags">
-          <span class="tech-chip">AWS</span>
-          <span class="tech-chip">CodePipeline</span>
-          <span class="tech-chip">CodeBuild</span>
-          <span class="tech-chip">CodeDeploy</span>
-          <span class="tech-chip">Tomcat</span>
-        </div>
-        <div class="ticket-footer">
-          <a href="https://github.com/OmChauhan9/aws-cicd-java-deployment-pipeline" target="_blank" rel="noopener noreferrer" class="project-btn-link">
-            <span>View on GitHub</span>
-            <span>↗</span>
-          </a>
-          <span class="hand" style="font-size: 1.1rem;">Zero Downtime</span>
-        </div>
-      </div>
-
-      <!-- Project 08 -->
-      <div class="ticket-card" data-category="cloud">
-        <div class="ticket-card-header">
-          <span class="ticket-num">PROJ // 08</span>
-          <span class="ticket-badge badge-p0">REAL-TIME</span>
-        </div>
-        <h3 class="ticket-title">Realtime Socket.IO Chat System</h3>
-        <p class="ticket-desc">
-          Real-time chat backend built with Node.js, Express, Socket.IO, SQLite, and Node.js Cluster. Demonstrates message persistence, client-side retries, duplicate-message prevention, and multi-worker Socket.IO coordination.
-        </p>
-        <div class="ticket-metric">
-          💬 Connection state recovery · SQLite persistence · Multi-worker Cluster
-        </div>
-        <div class="ticket-tags">
-          <span class="tech-chip">Node.js</span>
-          <span class="tech-chip">Express</span>
-          <span class="tech-chip">Socket.IO</span>
-          <span class="tech-chip">SQLite</span>
-          <span class="tech-chip">WebSockets</span>
-        </div>
-        <div class="ticket-footer">
-          <a href="https://github.com/OmChauhan9/realtime-socketio-chat-system" target="_blank" rel="noopener noreferrer" class="project-btn-link">
-            <span>View on GitHub</span>
-            <span>↗</span>
-          </a>
-          <span class="hand" style="font-size: 1.1rem;">Cluster Scaled</span>
-        </div>
-      </div>
-
-      <!-- Project 09 -->
+      <!-- Project 07: NOAH Programming Language -->
       <div class="ticket-card" data-category="systems">
         <div class="ticket-card-header">
-          <span class="ticket-num">PROJ // 09</span>
+          <span class="ticket-num">PROJ // 07</span>
           <span class="ticket-badge badge-p0">COMPILER DESIGN</span>
         </div>
         <h3 class="ticket-title">NOAH Programming Language Interpreter</h3>
@@ -1873,10 +1850,238 @@
         </div>
       </div>
 
-      <!-- Project 10 -->
-      <div class="ticket-card" data-category="cloud">
+      <!-- Project 08: Async AI Gateway with Streaming Telemetry -->
+      <div class="ticket-card featured-card" data-category="ai">
+        <div class="ticket-card-header">
+          <span class="ticket-num">PROJ // 08</span>
+          <span class="ticket-badge badge-ai">★ STREAMING GATEWAY</span>
+        </div>
+        <h3 class="ticket-title">Async AI Gateway with Streaming Telemetry</h3>
+        <p class="ticket-desc">
+          High-performance asynchronous AI Gateway built with FastAPI and Python asyncio. Features non-blocking Server-Sent Events (SSE) byte streaming, real-time TTFT (Time-to-First-Token) and TPOT (Time-Per-Output-Token) telemetry profiling, token leaky-bucket rate limiting, and an automated tri-state circuit breaker.
+        </p>
+        <div class="ticket-metric">
+          ⚡ Non-blocking SSE streaming · TTFT / TPOT profiling · Leaky-bucket limiter · Circuit breaker
+        </div>
+        <div class="ticket-tags">
+          <span class="tech-chip">Python</span>
+          <span class="tech-chip">FastAPI</span>
+          <span class="tech-chip">AsyncIO</span>
+          <span class="tech-chip">SSE Streaming</span>
+          <span class="tech-chip">Telemetry</span>
+          <span class="tech-chip">Circuit Breaker</span>
+        </div>
+        <div class="ticket-footer">
+          <a href="https://github.com/OmChauhan9/ai-gateway-streaming" target="_blank" rel="noopener noreferrer" class="project-btn-link">
+            <span>View on GitHub</span>
+            <span>↗</span>
+          </a>
+          <span class="hand" style="font-size: 1.15rem;">Sub-50ms TTFT</span>
+        </div>
+      </div>
+
+      <!-- Project 09: Agentic Finance Research System -->
+      <div class="ticket-card featured-card" data-category="ai">
+        <div class="ticket-card-header">
+          <span class="ticket-num">PROJ // 09</span>
+          <span class="ticket-badge badge-ai">★ MULTI-AGENT</span>
+        </div>
+        <h3 class="ticket-title">Agentic Finance Research System</h3>
+        <p class="ticket-desc">
+          LangGraph-based multi-agent workflow using a supervisor-controller pattern to decompose finance queries across news retrieval, financial statement analysis, SQL screening, analyst outlook, and sector research.
+        </p>
+        <div class="ticket-metric">
+          📈 yfinance · DuckDB filters · Web-search grounding · Structured reports
+        </div>
+        <div class="ticket-tags">
+          <span class="tech-chip">Python</span>
+          <span class="tech-chip">LangGraph</span>
+          <span class="tech-chip">LangChain</span>
+          <span class="tech-chip">DuckDB</span>
+          <span class="tech-chip">Agents</span>
+        </div>
+        <div class="ticket-footer">
+          <span class="private-badge">🔒 Private Codebase</span>
+          <span class="hand" style="font-size: 1.15rem;">Autonomous Workflow</span>
+        </div>
+      </div>
+
+      <!-- Project 10: CiteLens -->
+      <div class="ticket-card" data-category="ai">
         <div class="ticket-card-header">
           <span class="ticket-num">PROJ // 10</span>
+          <span class="ticket-badge badge-ai">RAG AGENT</span>
+        </div>
+        <h3 class="ticket-title">CiteLens — Mini Deep Research Agent</h3>
+        <p class="ticket-desc">
+          LangGraph-based research agent that decomposes user questions, retrieves evidence from indexed documents, and generates citation-grounded answers using a RAG pipeline with FAISS and LangSmith evaluation.
+        </p>
+        <div class="ticket-metric">
+          🔍 Citation verifier · LangSmith tracing · Hallucination checks
+        </div>
+        <div class="ticket-tags">
+          <span class="tech-chip">Python</span>
+          <span class="tech-chip">LangGraph</span>
+          <span class="tech-chip">RAG</span>
+          <span class="tech-chip">FAISS</span>
+          <span class="tech-chip">Evaluation</span>
+        </div>
+        <div class="ticket-footer">
+          <span class="private-badge">🔒 Private Repo</span>
+          <span class="hand" style="font-size: 1.1rem;">Fact-Checked Output</span>
+        </div>
+      </div>
+
+      <!-- Project 11: StratusVault -->
+      <div class="ticket-card featured-card" data-category="cloud">
+        <div class="ticket-card-header">
+          <span class="ticket-num">PROJ // 11</span>
+          <span class="ticket-badge badge-cloud">★ OPEN SOURCE</span>
+        </div>
+        <h3 class="ticket-title">StratusVault — Secure Cloud File Share</h3>
+        <p class="ticket-desc">
+          Secure cloud-native document locker built with Spring Boot, Firebase Authentication, PostgreSQL, Google Cloud Storage, and Cloud Run. Implements private file storage, server-side token verification, and file-level ACLs.
+        </p>
+        <div class="ticket-metric">
+          ☁️ Private GCS storage · Firebase auth · File-level ACLs · Cloud Run
+        </div>
+        <div class="ticket-tags">
+          <span class="tech-chip">Java</span>
+          <span class="tech-chip">Spring Boot</span>
+          <span class="tech-chip">Firebase</span>
+          <span class="tech-chip">PostgreSQL</span>
+          <span class="tech-chip">GCP</span>
+        </div>
+        <div class="ticket-footer">
+          <a href="https://github.com/OmChauhan9/stratusvault-secure-cloud-file-share" target="_blank" rel="noopener noreferrer" class="project-btn-link">
+            <span>View on GitHub</span>
+            <span>↗</span>
+          </a>
+          <span class="hand" style="font-size: 1.15rem;">Production Cloud</span>
+        </div>
+      </div>
+
+      <!-- Project 12: AWS Cloud Journey -->
+      <div class="ticket-card featured-card" data-category="cloud">
+        <div class="ticket-card-header">
+          <span class="ticket-num">PROJ // 12</span>
+          <span class="ticket-badge badge-cloud">★ CLOUD ARCHITECTURE</span>
+        </div>
+        <h3 class="ticket-title">AWS Cloud Journey & Production IaC Architecture</h3>
+        <p class="ticket-desc">
+          Comprehensive AWS Solutions Architecture and infrastructure repository. Features production Terraform blueprints, multi-tier VPC network topologies across AZs, IAM least-privilege governance policies, serverless Lambda microservices, and automated CloudWatch alarms.
+        </p>
+        <div class="ticket-metric">
+          ☁️ Multi-tier VPC · Terraform IaC · Serverless Lambda · IAM Least-Privilege
+        </div>
+        <div class="ticket-tags">
+          <span class="tech-chip">AWS</span>
+          <span class="tech-chip">Terraform</span>
+          <span class="tech-chip">Cloud Architecture</span>
+          <span class="tech-chip">VPC</span>
+          <span class="tech-chip">IAM</span>
+          <span class="tech-chip">Serverless</span>
+        </div>
+        <div class="ticket-footer">
+          <a href="https://github.com/OmChauhan9/AWS-Cloud-Journey" target="_blank" rel="noopener noreferrer" class="project-btn-link">
+            <span>View on GitHub</span>
+            <span>↗</span>
+          </a>
+          <span class="hand" style="font-size: 1.15rem;">Production IaC</span>
+        </div>
+      </div>
+
+      <!-- Project 13: Hybrid Cloud & Edge AI System -->
+      <div class="ticket-card" data-category="cloud">
+        <div class="ticket-card-header">
+          <span class="ticket-num">PROJ // 13</span>
+          <span class="ticket-badge badge-cloud">HYBRID AI / IOT</span>
+        </div>
+        <h3 class="ticket-title">Hybrid Cloud & Edge AI System</h3>
+        <p class="ticket-desc">
+          AWS edge/cloud inference system using IoT Greengrass, MQTT, SQS, Lambda, EC2, Docker, and PyTorch. Built a queue-depth autoscaling controller and edge processing pipeline that sends detected face crops instead of raw frames.
+        </p>
+        <div class="ticket-metric">
+          ⚡ 15-instance autoscaling · Edge inference · SQS-backed pipeline
+        </div>
+        <div class="ticket-tags">
+          <span class="tech-chip">AWS EC2</span>
+          <span class="tech-chip">Lambda</span>
+          <span class="tech-chip">SQS</span>
+          <span class="tech-chip">IoT Greengrass</span>
+          <span class="tech-chip">PyTorch</span>
+        </div>
+        <div class="ticket-footer">
+          <a href="https://github.com/OmChauhan9/hybrid-cloud-edge-ai-system" target="_blank" rel="noopener noreferrer" class="project-btn-link">
+            <span>View on GitHub</span>
+            <span>↗</span>
+          </a>
+          <span class="hand" style="font-size: 1.1rem;">Edge Compute</span>
+        </div>
+      </div>
+
+      <!-- Project 14: AWS CI/CD Java Deployment Pipeline -->
+      <div class="ticket-card" data-category="cloud">
+        <div class="ticket-card-header">
+          <span class="ticket-num">PROJ // 14</span>
+          <span class="ticket-badge badge-cloud">DEVOPS CI/CD</span>
+        </div>
+        <h3 class="ticket-title">AWS CI/CD Java Deployment Pipeline</h3>
+        <p class="ticket-desc">
+          Automated AWS deployment pipeline for a Maven Java web app deployed to EC2 Tomcat. Uses CodePipeline, CodeBuild, CodeDeploy, CodeArtifact, S3 artifacts, and Bash lifecycle hooks to automate build and deploy stages.
+        </p>
+        <div class="ticket-metric">
+          🔄 GitHub push → build → artifact → EC2 deployment
+        </div>
+        <div class="ticket-tags">
+          <span class="tech-chip">AWS</span>
+          <span class="tech-chip">CodePipeline</span>
+          <span class="tech-chip">CodeBuild</span>
+          <span class="tech-chip">CodeDeploy</span>
+          <span class="tech-chip">Tomcat</span>
+        </div>
+        <div class="ticket-footer">
+          <a href="https://github.com/OmChauhan9/aws-cicd-java-deployment-pipeline" target="_blank" rel="noopener noreferrer" class="project-btn-link">
+            <span>View on GitHub</span>
+            <span>↗</span>
+          </a>
+          <span class="hand" style="font-size: 1.1rem;">Zero Downtime</span>
+        </div>
+      </div>
+
+      <!-- Project 15: Realtime Socket.IO Chat System -->
+      <div class="ticket-card" data-category="cloud">
+        <div class="ticket-card-header">
+          <span class="ticket-num">PROJ // 15</span>
+          <span class="ticket-badge badge-p0">REAL-TIME</span>
+        </div>
+        <h3 class="ticket-title">Realtime Socket.IO Chat System</h3>
+        <p class="ticket-desc">
+          Real-time chat backend built with Node.js, Express, Socket.IO, SQLite, and Node.js Cluster. Demonstrates message persistence, client-side retries, duplicate-message prevention, and multi-worker Socket.IO coordination.
+        </p>
+        <div class="ticket-metric">
+          💬 Connection state recovery · SQLite persistence · Multi-worker Cluster
+        </div>
+        <div class="ticket-tags">
+          <span class="tech-chip">Node.js</span>
+          <span class="tech-chip">Express</span>
+          <span class="tech-chip">Socket.IO</span>
+          <span class="tech-chip">SQLite</span>
+          <span class="tech-chip">WebSockets</span>
+        </div>
+        <div class="ticket-footer">
+          <a href="https://github.com/OmChauhan9/realtime-socketio-chat-system" target="_blank" rel="noopener noreferrer" class="project-btn-link">
+            <span>View on GitHub</span>
+            <span>↗</span>
+          </a>
+          <span class="hand" style="font-size: 1.1rem;">Cluster Scaled</span>
+        </div>
+      </div>
+
+      <!-- Project 16: Cloud-Native Microservices E-Commerce -->
+      <div class="ticket-card" data-category="cloud">
+        <div class="ticket-card-header">
+          <span class="ticket-num">PROJ // 16</span>
           <span class="ticket-badge badge-cloud">MICROSERVICES</span>
         </div>
         <h3 class="ticket-title">Cloud-Native Microservices E-Commerce</h3>
@@ -1896,58 +2101,6 @@
         <div class="ticket-footer">
           <span class="private-badge">🔒 Private Codebase</span>
           <span class="hand" style="font-size: 1.1rem;">Resilient Design</span>
-        </div>
-      </div>
-
-      <!-- Project 11 -->
-      <div class="ticket-card" data-category="cloud">
-        <div class="ticket-card-header">
-          <span class="ticket-num">PROJ // 11</span>
-          <span class="ticket-badge badge-cloud">FULL-STACK</span>
-        </div>
-        <h3 class="ticket-title">Student Portfolio Network</h3>
-        <p class="ticket-desc">
-          Full-stack student networking platform for profiles, portfolio showcases, collaboration, and real-time communication. Built with Spring Boot backend, React/Redux frontend, and WebSocket messaging workflows.
-        </p>
-        <div class="ticket-metric">
-          🌐 Profiles · JWT Authentication · Real-time collaboration
-        </div>
-        <div class="ticket-tags">
-          <span class="tech-chip">Java</span>
-          <span class="tech-chip">Spring Boot</span>
-          <span class="tech-chip">React</span>
-          <span class="tech-chip">MySQL</span>
-          <span class="tech-chip">WebSockets</span>
-        </div>
-        <div class="ticket-footer">
-          <span class="private-badge">🔒 Private Codebase</span>
-          <span class="hand" style="font-size: 1.1rem;">Full-Stack Network</span>
-        </div>
-      </div>
-
-      <!-- Project 12 -->
-      <div class="ticket-card" data-category="cloud">
-        <div class="ticket-card-header">
-          <span class="ticket-num">PROJ // 12</span>
-          <span class="ticket-badge badge-cloud">ECOMMERCE & PAYMENTS</span>
-        </div>
-        <h3 class="ticket-title">Online Food Ordering System</h3>
-        <p class="ticket-desc">
-          Full-stack restaurant ordering application with menu browsing, dynamic cart and checkout flow, Stripe payment integration, automated receipts, and an admin dashboard for order and inventory tracking.
-        </p>
-        <div class="ticket-metric">
-          💳 Stripe payments integration · Admin dashboard · Order state management
-        </div>
-        <div class="ticket-tags">
-          <span class="tech-chip">Java</span>
-          <span class="tech-chip">Spring Boot</span>
-          <span class="tech-chip">React</span>
-          <span class="tech-chip">Stripe API</span>
-          <span class="tech-chip">MySQL</span>
-        </div>
-        <div class="ticket-footer">
-          <span class="private-badge">🔒 Private Codebase</span>
-          <span class="hand" style="font-size: 1.1rem;">Stripe Webhooks</span>
         </div>
       </div>
 
@@ -2010,45 +2163,65 @@
 
     <div class="skills-shelf">
       
-      <!-- Languages -->
+      <!-- 01 // Languages -->
       <div class="index-card">
         <div class="index-card-title">01 // Languages</div>
         <div class="skill-stamps">
+          <span class="skill-stamp">Java 21</span>
           <span class="skill-stamp">Java</span>
-          <span class="skill-stamp">Python</span>
+          <span class="skill-stamp">C++20</span>
           <span class="skill-stamp">C++</span>
-          <span class="skill-stamp">C</span>
-          <span class="skill-stamp">C#</span>
+          <span class="skill-stamp">Python</span>
           <span class="skill-stamp">SQL</span>
           <span class="skill-stamp">PL/SQL</span>
           <span class="skill-stamp">JavaScript</span>
           <span class="skill-stamp">TypeScript</span>
+          <span class="skill-stamp">Bash / Shell</span>
           <span class="skill-stamp">HTML/CSS</span>
         </div>
       </div>
 
-      <!-- Backend & Frameworks -->
+      <!-- 02 // Backend & APIs -->
       <div class="index-card">
         <div class="index-card-title">02 // Backend & APIs</div>
         <div class="skill-stamps">
           <span class="skill-stamp">Spring Boot</span>
-          <span class="skill-stamp">Spring MVC</span>
           <span class="skill-stamp">Spring Security</span>
-          <span class="skill-stamp">Spring Cloud</span>
-          <span class="skill-stamp">Hibernate</span>
+          <span class="skill-stamp">FastAPI</span>
           <span class="skill-stamp">Node.js</span>
           <span class="skill-stamp">Express</span>
-          <span class="skill-stamp">Flask</span>
+          <span class="skill-stamp">Hibernate / JPA</span>
           <span class="skill-stamp">REST APIs</span>
           <span class="skill-stamp">GraphQL</span>
           <span class="skill-stamp">Socket.IO</span>
-          <span class="skill-stamp">JUnit</span>
+          <span class="skill-stamp">WebSockets</span>
+          <span class="skill-stamp">SSE Streaming</span>
+          <span class="skill-stamp">JUnit / GoogleTest</span>
         </div>
       </div>
 
-      <!-- Cloud & Infrastructure -->
+      <!-- 03 // Distributed Systems & Primitives -->
       <div class="index-card">
-        <div class="index-card-title">03 // Cloud & Databases</div>
+        <div class="index-card-title">03 // Distributed Systems</div>
+        <div class="skill-stamps">
+          <span class="skill-stamp">Hashed Timing Wheels</span>
+          <span class="skill-stamp">LSM-Trees & SSTables</span>
+          <span class="skill-stamp">Bloom Filters</span>
+          <span class="skill-stamp">Write-Ahead Log (WAL)</span>
+          <span class="skill-stamp">Consistent Hashing (vnodes)</span>
+          <span class="skill-stamp">Vector Clocks</span>
+          <span class="skill-stamp">Quorum (W+R &gt; N)</span>
+          <span class="skill-stamp">Commit Logs</span>
+          <span class="skill-stamp">ZooKeeper</span>
+          <span class="skill-stamp">SPSC Ring Buffers</span>
+          <span class="skill-stamp">MurmurHash3</span>
+          <span class="skill-stamp">Fencing Tokens</span>
+        </div>
+      </div>
+
+      <!-- 04 // Cloud & Storage Infrastructure -->
+      <div class="index-card">
+        <div class="index-card-title">04 // Cloud & Databases</div>
         <div class="skill-stamps">
           <span class="skill-stamp">AWS (EC2, S3)</span>
           <span class="skill-stamp">AWS Lambda</span>
@@ -2066,51 +2239,38 @@
         </div>
       </div>
 
-      <!-- DevOps & Tools -->
+      <!-- 05 // DevOps & CI/CD -->
       <div class="index-card">
-        <div class="index-card-title">04 // DevOps & Tooling</div>
+        <div class="index-card-title">05 // DevOps & Infrastructure</div>
         <div class="skill-stamps">
+          <span class="skill-stamp">Terraform (IaC)</span>
           <span class="skill-stamp">Docker</span>
           <span class="skill-stamp">Kubernetes</span>
-          <span class="skill-stamp">Terraform</span>
-          <span class="skill-stamp">CI/CD Automation</span>
-          <span class="skill-stamp">Git</span>
+          <span class="skill-stamp">AWS CodePipeline</span>
           <span class="skill-stamp">GitHub Actions</span>
           <span class="skill-stamp">Jenkins</span>
-          <span class="skill-stamp">Linux</span>
-          <span class="skill-stamp">Postman</span>
-          <span class="skill-stamp">Swagger</span>
+          <span class="skill-stamp">Linux Systems</span>
+          <span class="skill-stamp">Maven</span>
+          <span class="skill-stamp">Git</span>
+          <span class="skill-stamp">Postman / Swagger</span>
         </div>
       </div>
 
-      <!-- AI/ML & Agents -->
+      <!-- 06 // AI/ML & Streaming Gateways -->
       <div class="index-card">
-        <div class="index-card-title">05 // AI/ML & Agent Systems</div>
+        <div class="index-card-title">06 // AI/ML & Agent Systems</div>
         <div class="skill-stamps">
           <span class="skill-stamp">LangGraph</span>
           <span class="skill-stamp">LangChain</span>
           <span class="skill-stamp">LangSmith</span>
           <span class="skill-stamp">RAG & FAISS</span>
+          <span class="skill-stamp">Streaming Telemetry</span>
+          <span class="skill-stamp">Circuit Breakers</span>
           <span class="skill-stamp">PyTorch</span>
           <span class="skill-stamp">TensorFlow</span>
-          <span class="skill-stamp">Hugging Face</span>
           <span class="skill-stamp">YOLOv5</span>
           <span class="skill-stamp">OpenCV</span>
-          <span class="skill-stamp">Pandas/NumPy</span>
-        </div>
-      </div>
-
-      <!-- Frontend -->
-      <div class="index-card">
-        <div class="index-card-title">06 // Client & Interface</div>
-        <div class="skill-stamps">
-          <span class="skill-stamp">React</span>
-          <span class="skill-stamp">React Native</span>
-          <span class="skill-stamp">Next.js</span>
-          <span class="skill-stamp">Angular</span>
-          <span class="skill-stamp">Redux</span>
-          <span class="skill-stamp">Tailwind CSS</span>
-          <span class="skill-stamp">Bootstrap</span>
+          <span class="skill-stamp">Hugging Face</span>
         </div>
       </div>
 
@@ -2170,28 +2330,28 @@
         <div class="check-item checked" data-id="1">
           <div class="check-box-custom">✓</div>
           <div class="check-text">
-            You value deterministic performance, robust data structures, and low-latency C++ / clean Java architectures.
+            You value distributed systems fundamentals (LSM-trees, consistent hashing, hashed timing wheels, and low-latency C++ / Java 21).
           </div>
         </div>
 
         <div class="check-item checked" data-id="2">
           <div class="check-box-custom">✓</div>
           <div class="check-text">
-            You need resilient cloud infrastructure (AWS / GCP / Docker / Kubernetes / automated CI/CD pipelines).
+            You need resilient cloud infrastructure & automation (AWS / GCP / Terraform / Docker / Kubernetes / automated CI/CD pipelines).
           </div>
         </div>
 
         <div class="check-item checked" data-id="3">
           <div class="check-box-custom">✓</div>
           <div class="check-text">
-            You are exploring practical AI tooling (LangGraph workflows, RAG systems, grounded multi-agent research).
+            You are exploring practical AI engineering (Async streaming gateways, LangGraph multi-agent workflows, citation-grounded RAG).
           </div>
         </div>
 
         <div class="check-item checked" data-id="4">
           <div class="check-box-custom">✓</div>
           <div class="check-text">
-            You're hiring for <strong>Full-Time 2026 Software Engineering</strong> roles (Backend, Systems, Cloud, AI).
+            You're hiring for <strong>Full-Time 2026 Software Engineering</strong> roles (Backend, Distributed Systems, Cloud, AI Platform).
           </div>
         </div>
 
